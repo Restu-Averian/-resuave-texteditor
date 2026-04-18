@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Tooltip from "@/components/ui/shared/tooltip";
 import { memo, useMemo } from "react";
 
 /**
@@ -10,9 +11,10 @@ import { memo, useMemo } from "react";
  * @param {boolean} [props.isActive] - Indicates if the associated format/feature is currently active in the editor. If true, it receives a distinct styling (default variant).
  * @param {React.MouseEventHandler<HTMLButtonElement>} props.onClick - Callback function executed when the button is clicked.
  * @param {React.ReactNode} props.icon - The icon element (e.g., from lucide-react) displayed inside the button.
+ * @param {React.ReactNode | string} props.label - The descriptive label shown in the tooltip for the toolbar item.
  * @returns {JSX.Element} A toolbar button rendered with the appropriate variant.
  */
-const ToolbarItem_ = ({ disabled, isActive, onClick, icon }) => {
+const ToolbarItem_ = ({ disabled, isActive, onClick, icon, label }) => {
   const variantBtn = useMemo(() => {
     if (typeof isActive === "boolean") {
       return isActive ? "default" : "ghost";
@@ -21,9 +23,11 @@ const ToolbarItem_ = ({ disabled, isActive, onClick, icon }) => {
   }, [isActive]);
 
   return (
-    <Button variant={variantBtn} disabled={disabled} onClick={onClick}>
-      {icon}
-    </Button>
+    <Tooltip content={label}>
+      <Button variant={variantBtn} disabled={disabled} onClick={onClick}>
+        {icon}
+      </Button>
+    </Tooltip>
   );
 };
 

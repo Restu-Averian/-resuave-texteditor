@@ -2,6 +2,7 @@ import { memo, useMemo, useState } from "react";
 import { Link2, Link2Off } from "lucide-react";
 import { normalizeUrl, validateUrl } from "@/helpers";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
+import Tooltip from "@/components/ui/shared/tooltip";
 import { Button } from "../../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Input } from "../../ui/input";
@@ -13,6 +14,7 @@ import {
   FieldLabel,
   FieldSet,
 } from "../../ui/field";
+import ToolbarItem from "../components/toolbar-item";
 
 const ToolbarLinkMedia_ = () => {
   const { editor, isSourceMode } = useCurrentEditor();
@@ -72,15 +74,14 @@ const ToolbarLinkMedia_ = () => {
 
   if (editorState?.isLink) {
     return (
-      <Button
-        variant="ghost"
-        onClick={() => {
-          editor.chain().focus().extendMarkRange("link").unsetLink().run();
-        }}
+      <ToolbarItem
+        icon={<Link2Off />}
+        label="Remove Link"
+        onClick={() =>
+          editor.chain().focus().extendMarkRange("link").unsetLink().run()
+        }
         disabled={isSourceMode}
-      >
-        <Link2Off />
-      </Button>
+      />
     );
   }
   return (
@@ -92,15 +93,17 @@ const ToolbarLinkMedia_ = () => {
       }}
     >
       <PopoverTrigger asChild>
-        <Button
-          variant="ghost"
-          disabled={isSourceMode}
-          onMouseDown={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <Link2 />
-        </Button>
+        <Tooltip content="Set Link">
+          <Button
+            variant="ghost"
+            disabled={isSourceMode}
+            onMouseDown={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <Link2 />
+          </Button>
+        </Tooltip>
       </PopoverTrigger>
 
       <PopoverContent className="space-y-4">

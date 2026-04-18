@@ -35,6 +35,7 @@ const ToolbarTextStyle_ = () => {
         isActive={editorState?.isBold}
         icon={<Bold />}
         onClick={() => editor?.chain()?.focus()?.toggleBold().run()}
+        label="Bold"
       />
 
       <ToolbarItem
@@ -42,6 +43,7 @@ const ToolbarTextStyle_ = () => {
         isActive={editorState?.isItalic}
         icon={<Italic />}
         onClick={() => editor?.chain()?.focus()?.toggleItalic().run()}
+        label="Italic"
       />
 
       <ToolbarItem
@@ -49,6 +51,7 @@ const ToolbarTextStyle_ = () => {
         isActive={editorState?.isUnderline}
         icon={<Underline />}
         onClick={() => editor?.chain()?.focus()?.toggleUnderline().run()}
+        label="Underline"
       />
 
       <ToolbarItem
@@ -56,6 +59,7 @@ const ToolbarTextStyle_ = () => {
         isActive={editorState?.isStrikeThrough}
         icon={<Strikethrough />}
         onClick={() => editor?.chain()?.focus()?.toggleStrike().run()}
+        label="Strike Through"
       />
 
       <ToolbarItem
@@ -68,6 +72,7 @@ const ToolbarTextStyle_ = () => {
             .setFontSize(`${numFontSize + 1}px`)
             .run();
         }}
+        label="Increase Font Size"
       />
 
       <ToolbarItem
@@ -82,6 +87,7 @@ const ToolbarTextStyle_ = () => {
               .run();
           }
         }}
+        label="Decrease Font Size"
       />
     </>
   );

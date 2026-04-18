@@ -11,6 +11,7 @@ import {
   TextQuote,
 } from "lucide-react";
 import { memo, useMemo } from "react";
+import Tooltip from "@/components/ui/shared/tooltip";
 import { Button } from "../../ui/button";
 import {
   DropdownMenu,
@@ -19,6 +20,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
+import ToolbarItem from "../components/toolbar-item";
 
 const HEADING_ICON = {
   1: <Heading1 />,
@@ -61,22 +63,24 @@ const ToolbarHeadingBlock_ = () => {
   );
   return (
     <>
-      <Button
-        variant={editorState?.isBlockquote ? "default" : "ghost"}
-        disabled={isSourceMode}
+      <ToolbarItem
+        icon={<TextQuote />}
+        label="Blockquote"
         onClick={() => editor?.chain()?.toggleBlockquote()?.run()}
-      >
-        <TextQuote />
-      </Button>
+        disabled={isSourceMode}
+        isActive={editorState?.isBlockquote}
+      />
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant={isActiveHeading ? "default" : "ghost"}
-            disabled={isSourceMode}
-          >
-            <Heading />
-          </Button>
+          <Tooltip content="Heading">
+            <Button
+              variant={isActiveHeading ? "default" : "ghost"}
+              disabled={isSourceMode}
+            >
+              <Heading />
+            </Button>
+          </Tooltip>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
@@ -110,15 +114,13 @@ const ToolbarHeadingBlock_ = () => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Button
+      <ToolbarItem
+        icon={<Minus />}
+        label="Horizontal Rule"
+        onClick={() => editor?.chain()?.focus()?.setHorizontalRule()?.run()}
         disabled={isSourceMode}
-        variant={editorState?.isHorizontalRule ? "default" : "ghost"}
-        onClick={() => {
-          editor?.chain()?.focus()?.setHorizontalRule()?.run();
-        }}
-      >
-        <Minus />
-      </Button>
+        isActive={editorState?.isHorizontalRule}
+      />
     </>
   );
 };

@@ -8,6 +8,7 @@ import Toolbar from "./components/toolbar";
 import { useMemo, useState } from "react";
 import { TaskItem, TaskList } from "@tiptap/extension-list";
 import EditorSourceMode from "./components/editor-source-mode";
+import { TooltipProvider } from "./components/ui/tooltip";
 
 function App() {
   const [isSourceMode, setSourceMode] = useState(false);
@@ -56,33 +57,35 @@ function App() {
 
   return (
     <EditorContext.Provider value={providerValue}>
-      <Toolbar />
+      <TooltipProvider>
+        <Toolbar />
 
-      <div
-        {...(isSourceMode && {
-          style: {
-            display: "none",
-          },
-        })}
-      >
-        <EditorContent
-          editor={editor}
-          className="outline-1 p-2.5 rounded-2xl w-2xl mx-auto"
-        />
-      </div>
+        <div
+          {...(isSourceMode && {
+            style: {
+              display: "none",
+            },
+          })}
+        >
+          <EditorContent
+            editor={editor}
+            className="outline-1 p-2.5 rounded-2xl w-2xl mx-auto"
+          />
+        </div>
 
-      {/* <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu> */}
-      {/* <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu> */}
+        {/* <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu> */}
+        {/* <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu> */}
 
-      <div
-        {...(!isSourceMode && {
-          style: {
-            display: "none",
-          },
-        })}
-      >
-        <EditorSourceMode />
-      </div>
+        <div
+          {...(!isSourceMode && {
+            style: {
+              display: "none",
+            },
+          })}
+        >
+          <EditorSourceMode />
+        </div>
+      </TooltipProvider>
     </EditorContext.Provider>
   );
 }

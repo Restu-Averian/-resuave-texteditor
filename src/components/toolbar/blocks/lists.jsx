@@ -9,6 +9,7 @@ import {
   ListTodo,
 } from "lucide-react";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
+import Tooltip from "@/components/ui/shared/tooltip";
 import { ToggleGroup, ToggleGroupItem } from "../../ui/toggle-group";
 import ToolbarItem from "../components/toolbar-item";
 
@@ -49,6 +50,7 @@ const ToolbarLists_ = () => {
         disabled={isSourceMode}
         icon={<List />}
         onClick={() => editor?.chain()?.focus()?.toggleBulletList()?.run()}
+        label="Bullet List"
       />
 
       <ToolbarItem
@@ -56,6 +58,7 @@ const ToolbarLists_ = () => {
         isActive={editorState?.isOrderedList}
         icon={<ListOrdered />}
         onClick={() => editor?.chain()?.focus()?.toggleOrderedList()?.run()}
+        label="Ordered List"
       />
 
       <ToolbarItem
@@ -63,6 +66,7 @@ const ToolbarLists_ = () => {
         isActive={editorState?.isTaskList}
         icon={<ListTodo />}
         onClick={() => editor?.chain()?.focus()?.toggleTaskList()?.run()}
+        label="Task List"
       />
 
       <ToggleGroup
@@ -74,18 +78,29 @@ const ToolbarLists_ = () => {
         }}
         disabled={isSourceMode}
       >
-        <ToggleGroupItem value="left">
-          <AlignLeftIcon />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="center">
-          <AlignCenterIcon />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="right">
-          <AlignRightIcon />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="justify">
-          <AlignJustifyIcon />
-        </ToggleGroupItem>
+        <Tooltip content="Align Left">
+          <ToggleGroupItem value="left">
+            <AlignLeftIcon />
+          </ToggleGroupItem>
+        </Tooltip>
+
+        <Tooltip content="Align Center">
+          <ToggleGroupItem value="center">
+            <AlignCenterIcon />
+          </ToggleGroupItem>
+        </Tooltip>
+
+        <Tooltip content="Align Right">
+          <ToggleGroupItem value="right">
+            <AlignRightIcon />
+          </ToggleGroupItem>
+        </Tooltip>
+
+        <Tooltip content="Align Justify">
+          <ToggleGroupItem value="justify">
+            <AlignJustifyIcon />
+          </ToggleGroupItem>
+        </Tooltip>
       </ToggleGroup>
     </>
   );

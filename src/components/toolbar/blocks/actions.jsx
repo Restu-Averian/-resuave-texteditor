@@ -24,16 +24,18 @@ const ToolbarActions_ = () => {
         disabled={editorState?.isUndo === false}
         icon={<Undo />}
         onClick={() => editor?.chain()?.focus()?.undo()?.run()}
+        label="Undo"
       />
 
       <ToolbarItem
         disabled={editorState?.isRedo === false}
         icon={<Redo />}
         onClick={() => editor?.chain()?.focus()?.redo()?.run()}
+        label="Redo"
       />
 
-      <Button
-        variant={isSourceMode ? "outline" : "ghost"}
+      <ToolbarItem
+        isActive={isSourceMode}
         onClick={() => {
           const htmlVal = editor?.getHTML();
 
@@ -47,9 +49,9 @@ const ToolbarActions_ = () => {
               setSourceMode(!isSourceMode);
             });
         }}
-      >
-        <CodeXmlIcon />
-      </Button>
+        icon={<CodeXmlIcon />}
+        label="Source"
+      />
     </>
   );
 };
