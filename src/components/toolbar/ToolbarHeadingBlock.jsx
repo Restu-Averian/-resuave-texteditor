@@ -8,6 +8,7 @@ import {
   Heading5,
   Heading6,
   Minus,
+  TextQuote,
 } from "lucide-react";
 import { memo, useMemo } from "react";
 import { Button } from "../ui/button";
@@ -46,6 +47,7 @@ const ToolbarHeadingBlock_ = () => {
       return {
         ...(objHeading || {}),
         isHorizontalRule: ctx?.editor?.isActive("horizontalRule"),
+        isBlockquote: ctx?.editor?.isActive("blockquote"),
       };
     },
   });
@@ -59,6 +61,14 @@ const ToolbarHeadingBlock_ = () => {
   );
   return (
     <>
+      <Button
+        variant={editorState?.isBlockquote ? "default" : "ghost"}
+        disabled={isSourceMode}
+        onClick={() => editor?.chain()?.toggleBlockquote()?.run()}
+      >
+        <TextQuote />
+      </Button>
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button

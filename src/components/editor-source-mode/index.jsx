@@ -25,10 +25,10 @@ const EditorSourceMode_ = () => {
       editor?.chain()?.setContent(value)?.run();
     }
   }, [isSourceMode]);
+
   return (
     <>
       <ReactCodeMirror
-        // value={value}
         height="300px"
         className="outline-1 p-2.5 rounded-2xl w-2xl mx-auto"
         extensions={[html()]}

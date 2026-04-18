@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
+import ToolbarItem from "./components/toolbar-item";
 
 const ToolbarLists_ = () => {
   const { editor, isSourceMode } = useCurrentEditor();
@@ -45,33 +46,25 @@ const ToolbarLists_ = () => {
   }, [editorState?.alignValue]);
   return (
     <>
-      <Button
-        variant={editorState?.isBulletList ? "default" : "ghost"}
-        onClick={() => {
-          editor?.chain()?.focus()?.toggleBulletList()?.run();
-        }}
+      <ToolbarItem
         disabled={isSourceMode}
-      >
-        <List />
-      </Button>
-      <Button
-        variant={editorState?.isOrderedList ? "default" : "ghost"}
-        onClick={() => {
-          editor?.chain()?.focus()?.toggleOrderedList()?.run();
-        }}
+        icon={<List />}
+        onClick={() => editor?.chain()?.focus()?.toggleBulletList()?.run()}
+      />
+
+      <ToolbarItem
         disabled={isSourceMode}
-      >
-        <ListOrdered />
-      </Button>
-      <Button
-        variant={editorState?.isTaskList ? "default" : "ghost"}
-        onClick={() => {
-          editor?.chain()?.focus()?.toggleTaskList()?.run();
-        }}
+        isActive={editorState?.isOrderedList}
+        icon={<ListOrdered />}
+        onClick={() => editor?.chain()?.focus()?.toggleOrderedList()?.run()}
+      />
+
+      <ToolbarItem
         disabled={isSourceMode}
-      >
-        <ListTodo />
-      </Button>
+        isActive={editorState?.isTaskList}
+        icon={<ListTodo />}
+        onClick={() => editor?.chain()?.focus()?.toggleTaskList()?.run()}
+      />
 
       <ToggleGroup
         type="single"

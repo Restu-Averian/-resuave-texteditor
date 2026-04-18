@@ -4,6 +4,7 @@ import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import * as prettier from "prettier/standalone";
 import * as prettierPluginHtml from "prettier/plugins/html";
 import { Button } from "../ui/button";
+import ToolbarItem from "./components/toolbar-item";
 
 const ToolbarActions_ = () => {
   const { editor, setSourceMode, isSourceMode } = useCurrentEditor();
@@ -19,24 +20,17 @@ const ToolbarActions_ = () => {
   });
   return (
     <>
-      <Button
-        variant="ghost"
+      <ToolbarItem
         disabled={editorState?.isUndo === false}
-        onClick={() => {
-          editor?.chain()?.focus()?.undo()?.run();
-        }}
-      >
-        <Undo />
-      </Button>
-      <Button
+        icon={<Undo />}
+        onClick={() => editor?.chain()?.focus()?.undo()?.run()}
+      />
+
+      <ToolbarItem
         disabled={editorState?.isRedo === false}
-        variant="ghost"
-        onClick={() => {
-          editor?.chain()?.focus()?.redo()?.run();
-        }}
-      >
-        <Redo />
-      </Button>
+        icon={<Redo />}
+        onClick={() => editor?.chain()?.focus()?.redo()?.run()}
+      />
 
       <Button
         variant={isSourceMode ? "outline" : "ghost"}

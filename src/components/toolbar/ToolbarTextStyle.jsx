@@ -9,6 +9,7 @@ import {
   Strikethrough,
   Underline,
 } from "lucide-react";
+import ToolbarItem from "./components/toolbar-item";
 
 const ToolbarTextStyle_ = () => {
   const { editor, isSourceMode } = useCurrentEditor();
@@ -30,48 +31,37 @@ const ToolbarTextStyle_ = () => {
   }, [editorState?.fontSize]);
   return (
     <>
-      <Button
-        variant={editorState?.isBold ? "default" : "ghost"}
-        onClick={() => {
-          editor?.chain()?.focus()?.toggleBold().run();
-        }}
+      <ToolbarItem
         disabled={isSourceMode}
-      >
-        <Bold />
-      </Button>
+        isActive={editorState?.isBold}
+        icon={<Bold />}
+        onClick={() => editor?.chain()?.focus()?.toggleBold().run()}
+      />
 
-      <Button
-        variant={editorState?.isItalic ? "default" : "ghost"}
-        onClick={() => {
-          editor?.chain()?.focus()?.toggleItalic().run();
-        }}
+      <ToolbarItem
         disabled={isSourceMode}
-      >
-        <Italic />
-      </Button>
+        isActive={editorState?.isItalic}
+        icon={<Italic />}
+        onClick={() => editor?.chain()?.focus()?.toggleItalic().run()}
+      />
 
-      <Button
-        variant={editorState?.isUnderline ? "default" : "ghost"}
-        onClick={() => {
-          editor?.chain()?.focus()?.toggleUnderline().run();
-        }}
+      <ToolbarItem
         disabled={isSourceMode}
-      >
-        <Underline />
-      </Button>
+        isActive={editorState?.isUnderline}
+        icon={<Underline />}
+        onClick={() => editor?.chain()?.focus()?.toggleUnderline().run()}
+      />
 
-      <Button
-        variant={editorState?.isStrikeThrough ? "default" : "ghost"}
-        onClick={() => {
-          editor?.chain()?.focus()?.toggleStrike().run();
-        }}
+      <ToolbarItem
         disabled={isSourceMode}
-      >
-        <Strikethrough />
-      </Button>
+        isActive={editorState?.isStrikeThrough}
+        icon={<Strikethrough />}
+        onClick={() => editor?.chain()?.focus()?.toggleStrike().run()}
+      />
 
-      <Button
-        variant="ghost"
+      <ToolbarItem
+        disabled={isSourceMode}
+        icon={<AArrowUp />}
         onClick={() => {
           editor
             .chain()
@@ -79,12 +69,11 @@ const ToolbarTextStyle_ = () => {
             .setFontSize(`${numFontSize + 1}px`)
             .run();
         }}
-        disabled={isSourceMode}
-      >
-        <AArrowUp />
-      </Button>
-      <Button
-        variant="ghost"
+      />
+
+      <ToolbarItem
+        disabled={isSourceMode || numFontSize <= 0}
+        icon={<AArrowDown />}
         onClick={() => {
           if (numFontSize > 0) {
             editor
@@ -94,10 +83,7 @@ const ToolbarTextStyle_ = () => {
               .run();
           }
         }}
-        disabled={isSourceMode}
-      >
-        <AArrowDown />
-      </Button>
+      />
     </>
   );
 };
