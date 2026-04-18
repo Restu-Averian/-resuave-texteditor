@@ -1,9 +1,9 @@
 import { memo } from "react";
-import ToolbarTextStyle from "./ToolbarTextStyle";
-import ToolbarHeadingBlock from "./ToolbarHeadingBlock";
-import ToolbarLists from "./ToolbarLists";
-import ToolbarLinkMedia from "./ToolbarLinkMedia";
-import ToolbarActions from "./ToolbarActions";
+import ToolbarTextStyle from "./blocks/text-style";
+import ToolbarLists from "./blocks/lists";
+import ToolbarLinkMedia from "./blocks/link-media";
+import ToolbarActions from "./blocks/actions";
+import ToolbarHeadingBlock from "./blocks/heading-block";
 
 const Toolbar_ = () => {
   return (

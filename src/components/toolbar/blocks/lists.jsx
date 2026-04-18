@@ -1,5 +1,4 @@
 import { memo, useMemo } from "react";
-import { Button } from "../ui/button";
 import {
   AlignCenterIcon,
   AlignJustifyIcon,
@@ -10,8 +9,8 @@ import {
   ListTodo,
 } from "lucide-react";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
-import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
-import ToolbarItem from "./components/toolbar-item";
+import { ToggleGroup, ToggleGroupItem } from "../../ui/toggle-group";
+import ToolbarItem from "../components/toolbar-item";
 
 const ToolbarLists_ = () => {
   const { editor, isSourceMode } = useCurrentEditor();

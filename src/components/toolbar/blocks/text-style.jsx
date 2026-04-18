@@ -1,6 +1,5 @@
 import { memo, useMemo } from "react";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
-import { Button } from "../ui/button";
 import {
   AArrowDown,
   AArrowUp,
@@ -9,7 +8,7 @@ import {
   Strikethrough,
   Underline,
 } from "lucide-react";
-import ToolbarItem from "./components/toolbar-item";
+import ToolbarItem from "../components/toolbar-item";
 
 const ToolbarTextStyle_ = () => {
   const { editor, isSourceMode } = useCurrentEditor();

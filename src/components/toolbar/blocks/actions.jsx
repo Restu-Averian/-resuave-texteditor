@@ -3,8 +3,8 @@ import { CodeXmlIcon, Redo, Undo } from "lucide-react";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import * as prettier from "prettier/standalone";
 import * as prettierPluginHtml from "prettier/plugins/html";
-import { Button } from "../ui/button";
-import ToolbarItem from "./components/toolbar-item";
+import { Button } from "@/components/ui/button";
+import ToolbarItem from "../components/toolbar-item";
 
 const ToolbarActions_ = () => {
   const { editor, setSourceMode, isSourceMode } = useCurrentEditor();

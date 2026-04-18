@@ -11,14 +11,14 @@ import {
   TextQuote,
 } from "lucide-react";
 import { memo, useMemo } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "../../ui/dropdown-menu";
 
 const HEADING_ICON = {
   1: <Heading1 />,

@@ -1,10 +1,10 @@
 import { memo, useMemo, useState } from "react";
-import { Button } from "../ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Input } from "../ui/input";
-import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import { Link2, Link2Off } from "lucide-react";
 import { normalizeUrl, validateUrl } from "@/helpers";
+import { useCurrentEditor, useEditorState } from "@tiptap/react";
+import { Button } from "../../ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import { Input } from "../../ui/input";
 import {
   Field,
   FieldDescription,
@@ -12,7 +12,7 @@ import {
   FieldGroup,
   FieldLabel,
   FieldSet,
-} from "../ui/field";
+} from "../../ui/field";
 
 const ToolbarLinkMedia_ = () => {
   const { editor, isSourceMode } = useCurrentEditor();
@@ -84,9 +84,21 @@ const ToolbarLinkMedia_ = () => {
     );
   }
   return (
-    <Popover>
+    <Popover
+      onOpenChange={(open) => {
+        if (!open) {
+          editor?.chain()?.focus()?.run();
+        }
+      }}
+    >
       <PopoverTrigger asChild>
-        <Button variant="ghost" disabled={isSourceMode}>
+        <Button
+          variant="ghost"
+          disabled={isSourceMode}
+          onMouseDown={(e) => {
+            e.preventDefault();
+          }}
+        >
           <Link2 />
         </Button>
       </PopoverTrigger>
