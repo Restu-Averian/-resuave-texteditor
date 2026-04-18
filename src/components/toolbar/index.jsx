@@ -1,22 +1,26 @@
-import { useCurrentEditor } from "@tiptap/react";
-import { Bold } from "lucide-react";
 import { memo } from "react";
-// import { Button } from "./components/ui/button";
+import ToolbarTextStyle from "./ToolbarTextStyle";
+import ToolbarHeadingBlock from "./ToolbarHeadingBlock";
+import ToolbarLists from "./ToolbarLists";
+import ToolbarLinkMedia from "./ToolbarLinkMedia";
+import ToolbarActions from "./ToolbarActions";
 
 const Toolbar_ = () => {
-  const { editor } = useCurrentEditor();
   return (
-    <div>
-      <button className="text-2xl text-green-300">WOULA CIKK</button>
-      {/* <Button
-        variant="outline"
-        onClick={() => {
-          editor?.chain()?.focus()?.toggleBold().run();
-        }}
-      >
-        
-        <Bold />
-      </Button> */}
+    <div className="toolbar">
+      <div className="toolbar-item">
+        <ToolbarTextStyle />
+
+        <ToolbarHeadingBlock />
+
+        <ToolbarLists />
+      </div>
+
+      <div className="toolbar-item">
+        <ToolbarLinkMedia />
+
+        <ToolbarActions />
+      </div>
     </div>
   );
 };

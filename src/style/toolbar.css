@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@layer components {
+  .toolbar {
+    @apply flex justify-center items-center gap-2 flex-col;
+  }
+  .toolbar-item {
+    @apply flex justify-center items-center gap-2;
+  }
+}
