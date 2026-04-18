@@ -5,12 +5,20 @@ import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import { Selection } from "@tiptap/extensions";
 import Toolbar from "./components/toolbar";
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { TaskItem, TaskList } from "@tiptap/extension-list";
 import EditorSourceMode from "./components/editor-source-mode";
 import { TooltipProvider } from "./components/ui/tooltip";
+import EditorPropsCtxProvider from "./context/EditorPropsCtxProvider";
 
-function App() {
+/**
+ *
+ * @param {object} props
+ * @param {import("./context/EditorPropsCtx").TEditorPropsCtx['locale']} props.locale
+ * @param {import("./context/EditorPropsCtx").TEditorPropsCtx['customTranslate']} props.customTranslate
+ * @returns {React.ReactNode}
+ */
+function App({ locale = "id", customTranslate = {} }) {
   const [isSourceMode, setSourceMode] = useState(false);
 
   const editor = useEditor({
@@ -56,37 +64,39 @@ function App() {
   );
 
   return (
-    <EditorContext.Provider value={providerValue}>
-      <TooltipProvider>
-        <Toolbar />
+    <EditorPropsCtxProvider locale={locale} customTranslate={customTranslate}>
+      <EditorContext.Provider value={providerValue}>
+        <TooltipProvider>
+          <Toolbar />
 
-        <div
-          {...(isSourceMode && {
-            style: {
-              display: "none",
-            },
-          })}
-        >
-          <EditorContent
-            editor={editor}
-            className="outline-1 p-2.5 rounded-2xl w-2xl mx-auto"
-          />
-        </div>
+          <div
+            {...(isSourceMode && {
+              style: {
+                display: "none",
+              },
+            })}
+          >
+            <EditorContent
+              editor={editor}
+              className="outline-1 p-2.5 rounded-2xl w-2xl mx-auto"
+            />
+          </div>
 
-        {/* <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu> */}
-        {/* <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu> */}
+          {/* <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu> */}
+          {/* <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu> */}
 
-        <div
-          {...(!isSourceMode && {
-            style: {
-              display: "none",
-            },
-          })}
-        >
-          <EditorSourceMode />
-        </div>
-      </TooltipProvider>
-    </EditorContext.Provider>
+          <div
+            {...(!isSourceMode && {
+              style: {
+                display: "none",
+              },
+            })}
+          >
+            <EditorSourceMode />
+          </div>
+        </TooltipProvider>
+      </EditorContext.Provider>
+    </EditorPropsCtxProvider>
   );
 }
 

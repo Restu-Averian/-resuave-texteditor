@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { memo, useMemo } from "react";
 import Tooltip from "@/components/ui/shared/tooltip";
+import useTranslation from "@/hooks/useTranslation";
 import { Button } from "../../ui/button";
 import {
   DropdownMenu,
@@ -32,6 +33,8 @@ const HEADING_ICON = {
 };
 
 const ToolbarHeadingBlock_ = () => {
+  const t = useTranslation();
+
   const { editor, isSourceMode } = useCurrentEditor();
 
   const editorState = useEditorState({
@@ -65,23 +68,23 @@ const ToolbarHeadingBlock_ = () => {
     <>
       <ToolbarItem
         icon={<TextQuote />}
-        label="Blockquote"
+        label={t("BLOCKQUOTE", "Blockquote")}
         onClick={() => editor?.chain()?.toggleBlockquote()?.run()}
         disabled={isSourceMode}
         isActive={editorState?.isBlockquote}
       />
 
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Tooltip content="Heading">
+        <Tooltip content={t("HEADING", "Heading")}>
+          <DropdownMenuTrigger asChild>
             <Button
               variant={isActiveHeading ? "default" : "ghost"}
               disabled={isSourceMode}
             >
               <Heading />
             </Button>
-          </Tooltip>
-        </DropdownMenuTrigger>
+          </DropdownMenuTrigger>
+        </Tooltip>
 
         <DropdownMenuContent>
           <DropdownMenuGroup>
@@ -105,7 +108,7 @@ const ToolbarHeadingBlock_ = () => {
                     }
                   >
                     {HEADING_ICON?.[level]}
-                    Heading {level}
+                    {t("HEADING", "Heading")} {level}
                   </Button>
                 </DropdownMenuItem>
               );
@@ -116,7 +119,7 @@ const ToolbarHeadingBlock_ = () => {
 
       <ToolbarItem
         icon={<Minus />}
-        label="Horizontal Rule"
+        label={t("HORIZONTAL_RULE", "Horizontal Rule")}
         onClick={() => editor?.chain()?.focus()?.setHorizontalRule()?.run()}
         disabled={isSourceMode}
         isActive={editorState?.isHorizontalRule}

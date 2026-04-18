@@ -10,10 +10,13 @@ import {
 } from "lucide-react";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import Tooltip from "@/components/ui/shared/tooltip";
+import useTranslation from "@/hooks/useTranslation";
 import { ToggleGroup, ToggleGroupItem } from "../../ui/toggle-group";
 import ToolbarItem from "../components/toolbar-item";
 
 const ToolbarLists_ = () => {
+  const t = useTranslation();
+
   const { editor, isSourceMode } = useCurrentEditor();
 
   const editorState = useEditorState({
@@ -50,7 +53,7 @@ const ToolbarLists_ = () => {
         disabled={isSourceMode}
         icon={<List />}
         onClick={() => editor?.chain()?.focus()?.toggleBulletList()?.run()}
-        label="Bullet List"
+        label={t("BULLET_LIST", "Bullet List")}
       />
 
       <ToolbarItem
@@ -58,7 +61,7 @@ const ToolbarLists_ = () => {
         isActive={editorState?.isOrderedList}
         icon={<ListOrdered />}
         onClick={() => editor?.chain()?.focus()?.toggleOrderedList()?.run()}
-        label="Ordered List"
+        label={t("ORDERED_LIST", "Ordered List")}
       />
 
       <ToolbarItem
@@ -66,7 +69,7 @@ const ToolbarLists_ = () => {
         isActive={editorState?.isTaskList}
         icon={<ListTodo />}
         onClick={() => editor?.chain()?.focus()?.toggleTaskList()?.run()}
-        label="Task List"
+        label={t("TASK_LIST", "Task List")}
       />
 
       <ToggleGroup
@@ -78,25 +81,25 @@ const ToolbarLists_ = () => {
         }}
         disabled={isSourceMode}
       >
-        <Tooltip content="Align Left">
+        <Tooltip content={t("ALIGN_LEFT", "Align Left")}>
           <ToggleGroupItem value="left">
             <AlignLeftIcon />
           </ToggleGroupItem>
         </Tooltip>
 
-        <Tooltip content="Align Center">
+        <Tooltip content={t("ALIGN_CENTER", "Align Center")}>
           <ToggleGroupItem value="center">
             <AlignCenterIcon />
           </ToggleGroupItem>
         </Tooltip>
 
-        <Tooltip content="Align Right">
+        <Tooltip content={t("ALIGN_RIGHT", "Align Right")}>
           <ToggleGroupItem value="right">
             <AlignRightIcon />
           </ToggleGroupItem>
         </Tooltip>
 
-        <Tooltip content="Align Justify">
+        <Tooltip content={t("ALIGN_JUSTIFY", "Align Justify")}>
           <ToggleGroupItem value="justify">
             <AlignJustifyIcon />
           </ToggleGroupItem>

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Tooltip from "@/components/ui/shared/tooltip";
-import { memo, useMemo } from "react";
+import React, { memo, useMemo } from "react";
 
 /**
  * A fundamental building block component for every item in the Toolbar.

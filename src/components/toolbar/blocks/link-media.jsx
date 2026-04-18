@@ -3,6 +3,7 @@ import { Link2, Link2Off } from "lucide-react";
 import { normalizeUrl, validateUrl } from "@/helpers";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import Tooltip from "@/components/ui/shared/tooltip";
+import useTranslation from "@/hooks/useTranslation";
 import { Button } from "../../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Input } from "../../ui/input";
@@ -17,6 +18,8 @@ import {
 import ToolbarItem from "../components/toolbar-item";
 
 const ToolbarLinkMedia_ = () => {
+  const t = useTranslation();
+
   const { editor, isSourceMode } = useCurrentEditor();
 
   const editorState = useEditorState({
@@ -76,7 +79,7 @@ const ToolbarLinkMedia_ = () => {
     return (
       <ToolbarItem
         icon={<Link2Off />}
-        label="Remove Link"
+        label={t("REMOVE_LINK", "Remove_Link")}
         onClick={() =>
           editor.chain().focus().extendMarkRange("link").unsetLink().run()
         }
@@ -92,31 +95,25 @@ const ToolbarLinkMedia_ = () => {
         }
       }}
     >
-      <PopoverTrigger asChild>
-        <Tooltip content="Set Link">
-          <Button
-            variant="ghost"
-            disabled={isSourceMode}
-            onMouseDown={(e) => {
-              e.preventDefault();
-            }}
-          >
+      <Tooltip content={t("SET_LINK", "Set Link")}>
+        <PopoverTrigger asChild>
+          <Button variant="ghost" disabled={isSourceMode}>
             <Link2 />
           </Button>
-        </Tooltip>
-      </PopoverTrigger>
+        </PopoverTrigger>
+      </Tooltip>
 
       <PopoverContent className="space-y-4">
         <div className="space-y-2">
           <FieldSet>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="link">Link</FieldLabel>
+                <FieldLabel htmlFor="link">{t("LINK", "Link")}</FieldLabel>
                 <Input
                   disabled={isSourceMode}
                   id="link"
                   autoComplete="off"
-                  placeholder="example.com"
+                  placeholder={t("LINK_PLACEHOLDER", "example.com")}
                   value={link?.value}
                   onChange={(e) => {
                     setLink((prev) => ({
@@ -129,7 +126,8 @@ const ToolbarLinkMedia_ = () => {
                   }}
                 />
                 <FieldDescription>
-                  Link that will be used : {normalizeUrl(link?.value)}
+                  {t("LINK_WILL_BE_USED", "Link that will be used")} :{" "}
+                  {normalizeUrl(link?.value)}
                 </FieldDescription>
 
                 <FieldError>{link?.error}</FieldError>
@@ -137,7 +135,9 @@ const ToolbarLinkMedia_ = () => {
 
               {isEmptySelection && (
                 <Field>
-                  <FieldLabel htmlFor="text-to-show">Text to Show</FieldLabel>
+                  <FieldLabel htmlFor="text-to-show">
+                    {t("TEXT_TO_SHOW", "Text to Show")}
+                  </FieldLabel>
                   <Input
                     disabled={isSourceMode}
                     id="text-to-show"
@@ -158,7 +158,7 @@ const ToolbarLinkMedia_ = () => {
           className="w-full"
           disabled={isSourceMode}
         >
-          Apply
+          {t("APPLY", "Apply")}
         </Button>
       </PopoverContent>
     </Popover>

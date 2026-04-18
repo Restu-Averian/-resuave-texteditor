@@ -3,10 +3,12 @@ import { CodeXmlIcon, Redo, Undo } from "lucide-react";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import * as prettier from "prettier/standalone";
 import * as prettierPluginHtml from "prettier/plugins/html";
-import { Button } from "@/components/ui/button";
+import useTranslation from "@/hooks/useTranslation";
 import ToolbarItem from "../components/toolbar-item";
 
 const ToolbarActions_ = () => {
+  const t = useTranslation();
+
   const { editor, setSourceMode, isSourceMode } = useCurrentEditor();
 
   const editorState = useEditorState({
@@ -24,14 +26,14 @@ const ToolbarActions_ = () => {
         disabled={editorState?.isUndo === false}
         icon={<Undo />}
         onClick={() => editor?.chain()?.focus()?.undo()?.run()}
-        label="Undo"
+        label={t("UNDO", "Undo")}
       />
 
       <ToolbarItem
         disabled={editorState?.isRedo === false}
         icon={<Redo />}
         onClick={() => editor?.chain()?.focus()?.redo()?.run()}
-        label="Redo"
+        label={t("REDO", "Redo")}
       />
 
       <ToolbarItem
@@ -50,7 +52,7 @@ const ToolbarActions_ = () => {
             });
         }}
         icon={<CodeXmlIcon />}
-        label="Source"
+        label={t("SOURCE", "Source")}
       />
     </>
   );

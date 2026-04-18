@@ -8,10 +8,13 @@ import {
   Strikethrough,
   Underline,
 } from "lucide-react";
+import useTranslation from "@/hooks/useTranslation";
 import ToolbarItem from "../components/toolbar-item";
 
 const ToolbarTextStyle_ = () => {
   const { editor, isSourceMode } = useCurrentEditor();
+
+  const t = useTranslation();
 
   const editorState = useEditorState({
     editor,
@@ -35,7 +38,7 @@ const ToolbarTextStyle_ = () => {
         isActive={editorState?.isBold}
         icon={<Bold />}
         onClick={() => editor?.chain()?.focus()?.toggleBold().run()}
-        label="Bold"
+        label={t("BOLD", "Bold")}
       />
 
       <ToolbarItem
@@ -43,7 +46,7 @@ const ToolbarTextStyle_ = () => {
         isActive={editorState?.isItalic}
         icon={<Italic />}
         onClick={() => editor?.chain()?.focus()?.toggleItalic().run()}
-        label="Italic"
+        label={t("ITALIC", "Italic")}
       />
 
       <ToolbarItem
@@ -51,7 +54,7 @@ const ToolbarTextStyle_ = () => {
         isActive={editorState?.isUnderline}
         icon={<Underline />}
         onClick={() => editor?.chain()?.focus()?.toggleUnderline().run()}
-        label="Underline"
+        label={t("UNDERLINE", "Underline")}
       />
 
       <ToolbarItem
@@ -59,7 +62,7 @@ const ToolbarTextStyle_ = () => {
         isActive={editorState?.isStrikeThrough}
         icon={<Strikethrough />}
         onClick={() => editor?.chain()?.focus()?.toggleStrike().run()}
-        label="Strike Through"
+        label={t("STRIKE_THROUGH", "Strike Through")}
       />
 
       <ToolbarItem
@@ -72,7 +75,7 @@ const ToolbarTextStyle_ = () => {
             .setFontSize(`${numFontSize + 1}px`)
             .run();
         }}
-        label="Increase Font Size"
+        label={t("INCREASE_FONT_SIZE", "Increase Font Size")}
       />
 
       <ToolbarItem
@@ -87,7 +90,7 @@ const ToolbarTextStyle_ = () => {
               .run();
           }
         }}
-        label="Decrease Font Size"
+        label={t("DECREASE_FONT_SIZE", "Decrease Font Size")}
       />
     </>
   );
