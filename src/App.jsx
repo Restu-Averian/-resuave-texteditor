@@ -3,6 +3,7 @@ import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
 import { TextStyleKit } from "@tiptap/extension-text-style";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
+import { Selection } from "@tiptap/extensions";
 import Toolbar from "./components/toolbar";
 import { useMemo, useState } from "react";
 import { TaskItem, TaskList } from "@tiptap/extension-list";
@@ -21,6 +22,9 @@ function App() {
       }),
       TextAlign?.configure({
         types: ["heading", "paragraph"],
+      }),
+      Selection.configure({
+        className: "selection",
       }),
     ],
     content: `
