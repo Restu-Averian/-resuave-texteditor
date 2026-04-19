@@ -11,9 +11,9 @@ import {
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import Tooltip from "@/components/ui/shared/tooltip";
 import useTranslation from "@/hooks/useTranslation";
-import { ToggleGroup, ToggleGroupItem } from "../../ui/toggle-group";
-import ToolbarItem from "../components/toolbar-item";
-import ResponsiveWrapperToolbarItem from "../components/responsive-wrapper-toolbar-item";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import ToolbarItem from "../../components/toolbar-item";
+import ResponsiveWrapperToolbarItem from "../../components/responsive-wrapper-toolbar-item";
 
 const ToolbarLists_ = () => {
   const t = useTranslation();

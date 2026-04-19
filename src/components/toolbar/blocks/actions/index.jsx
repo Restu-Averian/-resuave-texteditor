@@ -4,8 +4,8 @@ import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import * as prettier from "prettier/standalone";
 import * as prettierPluginHtml from "prettier/plugins/html";
 import useTranslation from "@/hooks/useTranslation";
-import ToolbarItem from "../components/toolbar-item";
-import ResponsiveWrapperToolbarItem from "../components/responsive-wrapper-toolbar-item";
+import ResponsiveWrapperToolbarItem from "../../components/responsive-wrapper-toolbar-item";
+import ToolbarItem from "../../components/toolbar-item";
 
 const ToolbarActions_ = () => {
   const t = useTranslation();

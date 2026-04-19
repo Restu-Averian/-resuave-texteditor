@@ -4,9 +4,13 @@ import { normalizeUrl, validateUrl } from "@/helpers";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import Tooltip from "@/components/ui/shared/tooltip";
 import useTranslation from "@/hooks/useTranslation";
-import { Button } from "../../ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
-import { Input } from "../../ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Input } from "@/components/ui/input";
 import {
   Field,
   FieldDescription,
@@ -14,9 +18,9 @@ import {
   FieldGroup,
   FieldLabel,
   FieldSet,
-} from "../../ui/field";
-import ToolbarItem from "../components/toolbar-item";
-import ResponsiveWrapperToolbarItem from "../components/responsive-wrapper-toolbar-item";
+} from "@/components/ui/field";
+import ToolbarItem from "../../components/toolbar-item";
+import ResponsiveWrapperToolbarItem from "../../components/responsive-wrapper-toolbar-item";
 
 const ToolbarLinkMedia_ = () => {
   const t = useTranslation();

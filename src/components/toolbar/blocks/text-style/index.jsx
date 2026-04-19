@@ -1,4 +1,4 @@
-import { Fragment, memo, useMemo } from "react";
+import { memo, useMemo } from "react";
 import { useCurrentEditor, useEditorState } from "@tiptap/react";
 import {
   AArrowDown,
@@ -9,8 +9,8 @@ import {
   Underline,
 } from "lucide-react";
 import useTranslation from "@/hooks/useTranslation";
-import ToolbarItem from "../components/toolbar-item";
-import ResponsiveWrapperToolbarItem from "../components/responsive-wrapper-toolbar-item";
+import ToolbarItem from "../../components/toolbar-item";
+import ResponsiveWrapperToolbarItem from "../../components/responsive-wrapper-toolbar-item";
 
 const ToolbarTextStyle_ = () => {
   const { editor, isSourceMode } = useCurrentEditor();
