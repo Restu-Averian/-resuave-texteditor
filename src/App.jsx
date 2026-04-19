@@ -1,42 +1,37 @@
-import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
-// import { BubbleMenu, FloatingMenu } from "@tiptap/react/menus";
-import { TextStyleKit } from "@tiptap/extension-text-style";
-import StarterKit from "@tiptap/starter-kit";
-import TextAlign from "@tiptap/extension-text-align";
-import { Selection } from "@tiptap/extensions";
-import Toolbar from "./components/toolbar";
+import { EditorContext, useEditor } from "@tiptap/react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import React, { useMemo, useState } from "react";
-import { TaskItem, TaskList } from "@tiptap/extension-list";
-import EditorSourceMode from "./components/editor-source-mode";
 import { TooltipProvider } from "./components/ui/tooltip";
 import EditorPropsCtxProvider from "./context/EditorPropsCtxProvider";
+import useBreakpoint from "./hooks/useBreakpoint";
+import Texteditor from "./Texteditor";
+import { EXTENSIONS } from "./constants";
+import EditorPreviewMobile from "./components/editor-preview-mobile";
 
 /**
  *
  * @param {object} props
  * @param {import("./context/EditorPropsCtx").TEditorPropsCtx['locale']} props.locale
  * @param {import("./context/EditorPropsCtx").TEditorPropsCtx['customTranslate']} props.customTranslate
+ * @param {import("./context/EditorPropsCtx").TEditorPropsCtx['disableMobileBehavior']} props.disableMobileBehavior
  * @returns {React.ReactNode}
  */
-function App({ locale = "id", customTranslate = {} }) {
+function App({
+  locale = "en",
+  customTranslate = {},
+  disableMobileBehavior = false,
+}) {
   const [isSourceMode, setSourceMode] = useState(false);
+  const { xs } = useBreakpoint();
 
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      TextStyleKit,
-      TaskList,
-      TaskItem?.configure({
-        nested: true,
-      }),
-      TextAlign?.configure({
-        types: ["heading", "paragraph"],
-      }),
-      Selection.configure({
-        className: "selection",
-      }),
-    ],
-    content: `
+  const styleEditor = useMemo(() => {
+    if (xs) {
+      return "focus:outline-none p-2.5 rounded-2xl w-full mx-auto h-full";
+    }
+    return "focus:outline-none outline-1 p-2.5 rounded-2xl w-2xl mx-auto";
+  }, [xs]);
+
+  const content = `
     <p>Hello World!</p>
 
     <ul data-type="taskList">
@@ -50,50 +45,62 @@ function App({ locale = "id", customTranslate = {} }) {
 
         <button>Ini button</button>
         </div>
-    `,
+    `;
+
+  const editor = useEditor({
+    extensions: EXTENSIONS,
+    content: content,
     editorProps: {
       attributes: {
-        class: "focus:outline-none",
+        class: styleEditor,
+      },
+    },
+  });
+
+  const previewEditor = useEditor({
+    extensions: EXTENSIONS,
+    content,
+    editorProps: {
+      attributes: {
+        class: styleEditor,
       },
     },
   });
 
   const providerValue = useMemo(
-    () => ({ editor, setSourceMode, isSourceMode }),
-    [editor, setSourceMode, isSourceMode],
+    () => ({ editor, previewEditor, setSourceMode, isSourceMode }),
+    [editor, setSourceMode, isSourceMode, previewEditor],
   );
 
   return (
-    <EditorPropsCtxProvider locale={locale} customTranslate={customTranslate}>
+    <EditorPropsCtxProvider
+      locale={locale}
+      customTranslate={customTranslate}
+      disableMobileBehavior={disableMobileBehavior}
+    >
       <EditorContext.Provider value={providerValue}>
         <TooltipProvider>
-          <Toolbar />
+          {xs ? (
+            <Dialog
+              onOpenChange={(value) => {
+                if (value === false) {
+                  previewEditor.chain()?.setContent(editor?.getJSON())?.run();
+                }
+              }}
+            >
+              <DialogTrigger asChild>
+                <div>
+                  <EditorPreviewMobile />
+                </div>
+              </DialogTrigger>
 
-          <div
-            {...(isSourceMode && {
-              style: {
-                display: "none",
-              },
-            })}
-          >
-            <EditorContent
-              editor={editor}
-              className="outline-1 p-2.5 rounded-2xl w-2xl mx-auto"
-            />
-          </div>
-
-          {/* <FloatingMenu editor={editor}>This is the floating menu</FloatingMenu> */}
-          {/* <BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu> */}
-
-          <div
-            {...(!isSourceMode && {
-              style: {
-                display: "none",
-              },
-            })}
-          >
-            <EditorSourceMode />
-          </div>
+              <DialogContent className="w-full h-full translate-0 inset-0 max-w-full">
+                <Texteditor />
+              </DialogContent>
+            </Dialog>
+          ) : (
+            <Texteditor />
+          )}
         </TooltipProvider>
       </EditorContext.Provider>
     </EditorPropsCtxProvider>

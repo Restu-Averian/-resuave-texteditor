@@ -8,6 +8,7 @@ import { createContext, useContext } from "react";
  * @typedef TEditorPropsCtx
  * @property {TLang} locale
  * @property {Record<TLang, Record<string, string>>} customTranslate
+ * @property {boolean} [disableMobileBehavior=false]
  */
 
 /** @type {import("react").Context<TEditorPropsCtx>} */

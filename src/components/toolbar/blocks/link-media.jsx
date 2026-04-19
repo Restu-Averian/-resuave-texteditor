@@ -16,6 +16,7 @@ import {
   FieldSet,
 } from "../../ui/field";
 import ToolbarItem from "../components/toolbar-item";
+import ResponsiveWrapperToolbarItem from "../components/responsive-wrapper-toolbar-item";
 
 const ToolbarLinkMedia_ = () => {
   const t = useTranslation();
@@ -88,80 +89,82 @@ const ToolbarLinkMedia_ = () => {
     );
   }
   return (
-    <Popover
-      onOpenChange={(open) => {
-        if (!open) {
-          editor?.chain()?.focus()?.run();
-        }
-      }}
-    >
-      <Tooltip content={t("SET_LINK", "Set Link")}>
-        <PopoverTrigger asChild>
-          <Button variant="ghost" disabled={isSourceMode}>
-            <Link2 />
-          </Button>
-        </PopoverTrigger>
-      </Tooltip>
+    <ResponsiveWrapperToolbarItem className="flex justify-center items-center">
+      <Popover
+        onOpenChange={(open) => {
+          if (!open) {
+            editor?.chain()?.focus()?.run();
+          }
+        }}
+      >
+        <Tooltip content={t("SET_LINK", "Set Link")}>
+          <PopoverTrigger asChild>
+            <Button variant="ghost" disabled={isSourceMode}>
+              <Link2 />
+            </Button>
+          </PopoverTrigger>
+        </Tooltip>
 
-      <PopoverContent className="space-y-4">
-        <div className="space-y-2">
-          <FieldSet>
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="link">{t("LINK", "Link")}</FieldLabel>
-                <Input
-                  disabled={isSourceMode}
-                  id="link"
-                  autoComplete="off"
-                  placeholder={t("LINK_PLACEHOLDER", "example.com")}
-                  value={link?.value}
-                  onChange={(e) => {
-                    setLink((prev) => ({
-                      ...prev,
-                      value: e.target.value,
-                      ...(link?.error && {
-                        error: "",
-                      }),
-                    }));
-                  }}
-                />
-                <FieldDescription>
-                  {t("LINK_WILL_BE_USED", "Link that will be used")} :{" "}
-                  {normalizeUrl(link?.value)}
-                </FieldDescription>
-
-                <FieldError>{link?.error}</FieldError>
-              </Field>
-
-              {isEmptySelection && (
+        <PopoverContent className="space-y-4">
+          <div className="space-y-2">
+            <FieldSet>
+              <FieldGroup>
                 <Field>
-                  <FieldLabel htmlFor="text-to-show">
-                    {t("TEXT_TO_SHOW", "Text to Show")}
-                  </FieldLabel>
+                  <FieldLabel htmlFor="link">{t("LINK", "Link")}</FieldLabel>
                   <Input
                     disabled={isSourceMode}
-                    id="text-to-show"
+                    id="link"
                     autoComplete="off"
-                    value={textToShow}
+                    placeholder={t("LINK_PLACEHOLDER", "example.com")}
+                    value={link?.value}
                     onChange={(e) => {
-                      setTextToShow(e.target.value);
+                      setLink((prev) => ({
+                        ...prev,
+                        value: e.target.value,
+                        ...(link?.error && {
+                          error: "",
+                        }),
+                      }));
                     }}
                   />
-                </Field>
-              )}
-            </FieldGroup>
-          </FieldSet>
-        </div>
+                  <FieldDescription>
+                    {t("LINK_WILL_BE_USED", "Link that will be used")} :{" "}
+                    {normalizeUrl(link?.value)}
+                  </FieldDescription>
 
-        <Button
-          onClick={onApplyLink}
-          className="w-full"
-          disabled={isSourceMode}
-        >
-          {t("APPLY", "Apply")}
-        </Button>
-      </PopoverContent>
-    </Popover>
+                  <FieldError>{link?.error}</FieldError>
+                </Field>
+
+                {isEmptySelection && (
+                  <Field>
+                    <FieldLabel htmlFor="text-to-show">
+                      {t("TEXT_TO_SHOW", "Text to Show")}
+                    </FieldLabel>
+                    <Input
+                      disabled={isSourceMode}
+                      id="text-to-show"
+                      autoComplete="off"
+                      value={textToShow}
+                      onChange={(e) => {
+                        setTextToShow(e.target.value);
+                      }}
+                    />
+                  </Field>
+                )}
+              </FieldGroup>
+            </FieldSet>
+          </div>
+
+          <Button
+            onClick={onApplyLink}
+            className="w-full"
+            disabled={isSourceMode}
+          >
+            {t("APPLY", "Apply")}
+          </Button>
+        </PopoverContent>
+      </Popover>
+    </ResponsiveWrapperToolbarItem>
   );
 };
 

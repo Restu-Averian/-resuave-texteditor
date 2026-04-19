@@ -22,6 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 import ToolbarItem from "../components/toolbar-item";
+import ResponsiveWrapperToolbarItem from "../components/responsive-wrapper-toolbar-item";
 
 const HEADING_ICON = {
   1: <Heading1 />,
@@ -65,7 +66,7 @@ const ToolbarHeadingBlock_ = () => {
     [editorState],
   );
   return (
-    <>
+    <ResponsiveWrapperToolbarItem className="flex justify-center items-center">
       <ToolbarItem
         icon={<TextQuote />}
         label={t("BLOCKQUOTE", "Blockquote")}
@@ -124,7 +125,7 @@ const ToolbarHeadingBlock_ = () => {
         disabled={isSourceMode}
         isActive={editorState?.isHorizontalRule}
       />
-    </>
+    </ResponsiveWrapperToolbarItem>
   );
 };
 

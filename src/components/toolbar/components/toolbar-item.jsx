@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Tooltip from "@/components/ui/shared/tooltip";
+import useBreakpoint from "@/hooks/useBreakpoint";
 import React, { memo, useMemo } from "react";
 
 /**
@@ -15,6 +16,8 @@ import React, { memo, useMemo } from "react";
  * @returns {JSX.Element} A toolbar button rendered with the appropriate variant.
  */
 const ToolbarItem_ = ({ disabled, isActive, onClick, icon, label }) => {
+  const { xs } = useBreakpoint();
+
   const variantBtn = useMemo(() => {
     if (typeof isActive === "boolean") {
       return isActive ? "default" : "ghost";
@@ -23,7 +26,12 @@ const ToolbarItem_ = ({ disabled, isActive, onClick, icon, label }) => {
   }, [isActive]);
 
   return (
-    <Tooltip content={label}>
+    <Tooltip
+      content={label}
+      {...(xs && {
+        open: false,
+      })}
+    >
       <Button variant={variantBtn} disabled={disabled} onClick={onClick}>
         {icon}
       </Button>
