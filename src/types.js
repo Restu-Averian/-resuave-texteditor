@@ -24,6 +24,8 @@
  * @property {Record<TLang, Record<keyof typeof import('@/lib/locales')['EDITOR_LOCALES']['en'], string>>} [customTranslate={}]
  * @property {string} value
  * @property {(value: string | undefined, event: import('@tiptap/react').EditorEvents['update']) => void} onChange
+ * @property {(value: string | undefined, event: import('@tiptap/react').EditorEvents['blur']) => void} [onBlur]
+ * @property {(value: string | undefined, event: import('@tiptap/react').EditorEvents['focus']) => void} [onFocus]
  * @property {string} [placeholder]
  * @property {boolean} [readOnly]
  * @property {"disabled" | "hidden"} [readOnlyToolbarMode]

@@ -20,6 +20,8 @@ function Texteditor({
   customTranslate = {},
   value,
   onChange,
+  onBlur,
+  onFocus,
   placeholder,
   readOnly = false,
   readOnlyToolbarMode = "hidden",
@@ -58,8 +60,18 @@ function Texteditor({
 
         onChange?.(editor?.getHTML(), e);
       },
+      onBlur(e) {
+        const editor = e?.editor;
+
+        onBlur?.(editor?.getHTML(), e);
+      },
+      onFocus(e) {
+        const editor = e?.editor;
+
+        onFocus?.(editor?.getHTML(), e);
+      },
     },
-    [extensions],
+    [extensions, onBlur, onChange, onFocus],
   );
 
   const readOnlyMobileEditor = useEditor(
