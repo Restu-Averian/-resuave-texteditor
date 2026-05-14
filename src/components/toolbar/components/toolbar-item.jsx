@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Tooltip from "@/components/ui/shared/tooltip";
+import { useEditorPropsCtx } from "@/context/EditorPropsCtx";
 import useBreakpoint from "@/hooks/useBreakpoint";
 import React, { memo, useMemo } from "react";
 
@@ -17,6 +18,7 @@ import React, { memo, useMemo } from "react";
  */
 const ToolbarItem_ = ({ disabled, isActive, onClick, icon, label }) => {
   const { xs } = useBreakpoint();
+  const { readOnlyToolbarMode } = useEditorPropsCtx();
 
   const variantBtn = useMemo(() => {
     if (typeof isActive === "boolean") {
@@ -32,7 +34,11 @@ const ToolbarItem_ = ({ disabled, isActive, onClick, icon, label }) => {
         open: false,
       })}
     >
-      <Button variant={variantBtn} disabled={disabled} onClick={onClick}>
+      <Button
+        variant={variantBtn}
+        disabled={disabled || readOnlyToolbarMode === "disabled"}
+        onClick={onClick}
+      >
         {icon}
       </Button>
     </Tooltip>

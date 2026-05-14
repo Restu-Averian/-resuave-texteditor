@@ -22,6 +22,7 @@ function Texteditor({
   onChange,
   placeholder,
   readOnly = false,
+  readOnlyToolbarMode = "hidden",
   toolbarConfig = {},
   className,
   editorClassName,
@@ -125,6 +126,7 @@ function Texteditor({
       readOnly={readOnly}
       toolbarConfig={toolbarConfig}
       contentClassName={contentClassName}
+      readOnlyToolbarMode={readOnlyToolbarMode}
     >
       <div className={className}>
         <EditorContext.Provider value={providerValue}>

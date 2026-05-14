@@ -47,7 +47,7 @@ const TexteditorContent_ = () => {
   }, []);
   return (
     <>
-      {!xs && !readOnly && <Toolbar />}
+      <Toolbar />
 
       <div
         {...(isSourceMode && {

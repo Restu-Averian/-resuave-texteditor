@@ -26,6 +26,7 @@
  * @property {(value: string | undefined, event: import('@tiptap/react').EditorEvents['update']) => void} onChange
  * @property {string} [placeholder]
  * @property {boolean} [readOnly]
+ * @property {"disabled" | "hidden"} [readOnlyToolbarMode]
  * @property {{ hiddenGroups?: TToolbarGroup[], hiddenItems?: TToolbarItem[] }} [toolbarConfig]
  * @property {string} [className]
  * @property {string} [editorClassName]
