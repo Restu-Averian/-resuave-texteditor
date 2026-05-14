@@ -22,13 +22,15 @@ function App({
   disableMobileBehavior = false,
 }) {
   const [isSourceMode, setSourceMode] = useState(false);
+  const [showEditableEditorMobile, setShowEditableEditorMobile] =
+    useState(false);
   const { xs } = useBreakpoint();
 
   const styleEditor = useMemo(() => {
     if (xs) {
-      return "focus:outline-none p-2.5 rounded-2xl w-full mx-auto h-full";
+      return "p-2.5 rounded-2xl w-full mx-auto h-full";
     }
-    return "focus:outline-none outline-1 p-2.5 rounded-2xl w-2xl mx-auto";
+    return "outline-1 p-2.5 rounded-2xl w-2xl mx-auto";
   }, [xs]);
 
   const content = `
@@ -57,7 +59,7 @@ function App({
     },
   });
 
-  const previewEditor = useEditor({
+  const readOnlyMobileEditor = useEditor({
     extensions: EXTENSIONS,
     content,
     editorProps: {
@@ -68,8 +70,20 @@ function App({
   });
 
   const providerValue = useMemo(
-    () => ({ editor, previewEditor, setSourceMode, isSourceMode }),
-    [editor, setSourceMode, isSourceMode, previewEditor],
+    () => ({
+      editor,
+      readOnlyMobileEditor,
+      setSourceMode,
+      isSourceMode,
+      setShowEditableEditorMobile,
+    }),
+    [
+      editor,
+      setSourceMode,
+      isSourceMode,
+      readOnlyMobileEditor,
+      setShowEditableEditorMobile,
+    ],
   );
 
   return (
@@ -82,11 +96,8 @@ function App({
         <TooltipProvider>
           {xs ? (
             <Dialog
-              onOpenChange={(value) => {
-                if (value === false) {
-                  previewEditor.chain()?.setContent(editor?.getJSON())?.run();
-                }
-              }}
+              open={showEditableEditorMobile}
+              onOpenChange={setShowEditableEditorMobile}
             >
               <DialogTrigger asChild>
                 <div>

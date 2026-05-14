@@ -3,7 +3,7 @@ import { memo } from "react";
 import ToolbarTextStyle from "../toolbar/blocks/text-style";
 
 const EditorPreviewMobile_ = () => {
-  const { previewEditor } = useCurrentEditor();
+  const { readOnlyMobileEditor } = useCurrentEditor();
   return (
     <>
       <div className="toolbar">
@@ -12,7 +12,7 @@ const EditorPreviewMobile_ = () => {
         </div>
       </div>
 
-      <EditorContent editor={previewEditor} />
+      <EditorContent editor={readOnlyMobileEditor} />
     </>
   );
 };

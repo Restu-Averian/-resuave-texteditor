@@ -8,7 +8,12 @@ import { Button } from "./components/ui/button";
 import { Edit2 } from "lucide-react";
 
 const Texteditor_ = () => {
-  const { editor, isSourceMode } = useCurrentEditor();
+  const {
+    editor,
+    isSourceMode,
+    readOnlyMobileEditor,
+    setShowEditableEditorMobile,
+  } = useCurrentEditor();
 
   const { xs } = useBreakpoint();
 
@@ -76,7 +81,16 @@ const Texteditor_ = () => {
           }}
         >
           <div className="w-full text-right pr-5 pb-5">
-            <Button>
+            <Button
+              onClick={() => {
+                readOnlyMobileEditor
+                  .chain()
+                  ?.setContent(editor?.getJSON())
+                  ?.run();
+
+                setShowEditableEditorMobile(false);
+              }}
+            >
               <Edit2 /> Done
             </Button>
           </div>
