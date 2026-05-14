@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useEditorPropsCtx } from "@/context/EditorPropsCtx";
 
 const useToolbarConfig = () => {
@@ -10,9 +10,14 @@ const useToolbarConfig = () => {
 
   const hiddenGroups = toolbarConfig?.hiddenGroups || [];
   const hiddenItems = toolbarConfig?.hiddenItems || [];
-  const checkDisableToolbarItem = readOnly && readOnlyToolbarMode === "disabled";
+
+  const checkDisableToolbarItem = useMemo(
+    () => readOnly && readOnlyToolbarMode === "disabled",
+    [readOnly, readOnlyToolbarMode],
+  );
 
   const checkShowToolbarGroup = useCallback(
+    /** @param {import("@/types").TToolbarGroup} group  */
     (group) => {
       if (!readOnly || readOnlyToolbarMode === "disabled") {
         return !hiddenGroups?.includes(group);
@@ -23,6 +28,7 @@ const useToolbarConfig = () => {
   );
 
   const checkShowToolbarItem = useCallback(
+    /** @param {import("@/types").TToolbarItem} item  */
     (item) => {
       if (!readOnly || readOnlyToolbarMode === "disabled") {
         return !hiddenItems?.includes(item);
