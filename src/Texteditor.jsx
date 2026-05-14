@@ -38,7 +38,7 @@ function Texteditor({
 
   const defaultClassEditor = useMemo(() => {
     if (xs) {
-      return "p-2.5 rounded-2xl w-full mx-auto h-full";
+      return "p-2.5 rounded-2xl w-full mx-auto h-full outline-1 ";
     }
     return "outline-1 p-2.5 rounded-2xl w-2xl mx-auto";
   }, [xs]);

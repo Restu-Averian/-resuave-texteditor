@@ -17,8 +17,7 @@ import useToolbarConfig from "@/hooks/useToolbarConfig";
 
 const ToolbarMobile_ = ({ showToolbarMobile, setShowToolbarMobile }) => {
   const { editor } = useCurrentEditor();
-  const { checkDisableToolbarItem, checkShowToolbarGroup } =
-    useToolbarConfig();
+  const { checkDisableToolbarItem, checkShowToolbarGroup } = useToolbarConfig();
 
   const tabList = useMemo(() => {
     return [
@@ -83,7 +82,7 @@ const ToolbarMobile_ = ({ showToolbarMobile, setShowToolbarMobile }) => {
 
       {tabList?.map((tab) => {
         return (
-          <TabsContent value={tab?.value} key={tab?.value}>
+          <TabsContent value={tab?.value} key={tab?.value} className="bg-white">
             {tab?.content}
           </TabsContent>
         );

@@ -9,13 +9,17 @@ import {
   Underline,
 } from "lucide-react";
 import useTranslation from "@/hooks/useTranslation";
+import useToolbarConfig from "@/hooks/useToolbarConfig";
+import useBreakpoint from "@/hooks/useBreakpoint";
+import { cn } from "@/lib/utils";
 import ToolbarItem from "../../components/toolbar-item";
 import ResponsiveWrapperToolbarItem from "../../components/responsive-wrapper-toolbar-item";
-import useToolbarConfig from "@/hooks/useToolbarConfig";
 
-const ToolbarTextStyle_ = () => {
+const ToolbarTextStyle_ = ({ isPreview = false }) => {
   const { editor, isSourceMode } = useCurrentEditor();
   const { checkShowToolbarItem } = useToolbarConfig();
+
+  const { xs } = useBreakpoint();
 
   const t = useTranslation();
 
@@ -35,9 +39,16 @@ const ToolbarTextStyle_ = () => {
   const numFontSize = useMemo(() => {
     return Number(editorState?.fontSize?.replaceAll("px", ""));
   }, [editorState?.fontSize]);
+
   return (
-    <>
-      <ResponsiveWrapperToolbarItem className="flex justify-center items-center">
+    <div className="px-3">
+      <ResponsiveWrapperToolbarItem
+        isPreview={isPreview}
+        className={cn(
+          "flex justify-center items-center mb-2 gap-2",
+          xs && isPreview === false && "justify-start",
+        )}
+      >
         {checkShowToolbarItem("bold") && (
           <ToolbarItem
             disabled={isSourceMode}
@@ -45,6 +56,7 @@ const ToolbarTextStyle_ = () => {
             icon={<Bold />}
             onClick={() => editor?.chain()?.focus()?.toggleBold().run()}
             label={t("BOLD", "Bold")}
+            isPreview={isPreview}
           />
         )}
 
@@ -55,6 +67,7 @@ const ToolbarTextStyle_ = () => {
             icon={<Italic />}
             onClick={() => editor?.chain()?.focus()?.toggleItalic().run()}
             label={t("ITALIC", "Italic")}
+            isPreview={isPreview}
           />
         )}
 
@@ -65,6 +78,7 @@ const ToolbarTextStyle_ = () => {
             icon={<Underline />}
             onClick={() => editor?.chain()?.focus()?.toggleUnderline().run()}
             label={t("UNDERLINE", "Underline")}
+            isPreview={isPreview}
           />
         )}
 
@@ -75,11 +89,18 @@ const ToolbarTextStyle_ = () => {
             icon={<Strikethrough />}
             onClick={() => editor?.chain()?.focus()?.toggleStrike().run()}
             label={t("STRIKE_THROUGH", "Strike Through")}
+            isPreview={isPreview}
           />
         )}
       </ResponsiveWrapperToolbarItem>
 
-      <ResponsiveWrapperToolbarItem className="flex justify-center items-center">
+      <ResponsiveWrapperToolbarItem
+        isPreview={isPreview}
+        className={cn(
+          "flex justify-center items-center mb-2 gap-2",
+          xs && isPreview === false && "justify-start",
+        )}
+      >
         {checkShowToolbarItem("increaseFontSize") && (
           <ToolbarItem
             disabled={isSourceMode}
@@ -92,6 +113,7 @@ const ToolbarTextStyle_ = () => {
                 .run();
             }}
             label={t("INCREASE_FONT_SIZE", "Increase Font Size")}
+            isPreview={isPreview}
           />
         )}
 
@@ -109,10 +131,11 @@ const ToolbarTextStyle_ = () => {
               }
             }}
             label={t("DECREASE_FONT_SIZE", "Decrease Font Size")}
+            isPreview={isPreview}
           />
         )}
       </ResponsiveWrapperToolbarItem>
-    </>
+    </div>
   );
 };
 

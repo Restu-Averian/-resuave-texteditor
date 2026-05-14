@@ -15,7 +15,7 @@ const EditorPreviewMobile_ = () => {
       {checkShowToolbarGroup("textStyle") && (
         <div className="toolbar">
           <div className="toolbar-item">
-            <ToolbarTextStyle />
+            <ToolbarTextStyle isPreview />
           </div>
         </div>
       )}
