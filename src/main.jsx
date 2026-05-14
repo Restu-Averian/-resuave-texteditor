@@ -1,9 +1,20 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
+import Texteditor from "./Texteditor.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <Texteditor
+      value="<p>Haloasdas</p>"
+      onChange={(value) => {
+        console.log("e", value);
+      }}
+      locale="id"
+      customTranslate={{
+        id: {
+          BOLD: "Penghitaman",
+        },
+      }}
+    />
   </StrictMode>,
 );

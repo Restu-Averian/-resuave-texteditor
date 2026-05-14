@@ -1,109 +1,105 @@
-import { EditorContent, useCurrentEditor } from "@tiptap/react";
-import { memo, useEffect, useState } from "react";
-import Toolbar from "./components/toolbar";
-import EditorSourceMode from "./components/editor-source-mode";
+import { EditorContext, useEditor } from "@tiptap/react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import React, { useMemo, useState } from "react";
+import { TooltipProvider } from "./components/ui/tooltip";
+import EditorPropsCtxProvider from "./context/EditorPropsCtxProvider";
 import useBreakpoint from "./hooks/useBreakpoint";
-import ToolbarMobile from "./components/toolbar/toolbar-mobile";
-import { Button } from "./components/ui/button";
-import { Edit2 } from "lucide-react";
+import TexteditorContent from "./TexteditorContent";
+import { EXTENSIONS } from "./constants";
+import EditorPreviewMobile from "./components/editor-preview-mobile";
 
-const Texteditor_ = () => {
-  const {
-    editor,
-    isSourceMode,
-    readOnlyMobileEditor,
-    setShowEditableEditorMobile,
-  } = useCurrentEditor();
+/**
+ *
+ * @param {import("./context/EditorPropsCtx").TEditorPropsCtx} props
+
+ * @returns {React.ReactNode}
+ */
+function Texteditor({ locale = "en", customTranslate = {}, value, onChange }) {
+  const [isSourceMode, setSourceMode] = useState(false);
+  const [showEditableEditorMobile, setShowEditableEditorMobile] =
+    useState(false);
 
   const { xs } = useBreakpoint();
 
-  const [keyboardOffset, setKeyboardOffset] = useState(0);
-  const [showToolbarMobile, setShowToolbarMobile] = useState(false);
+  const styleEditor = useMemo(() => {
+    if (xs) {
+      return "p-2.5 rounded-2xl w-full mx-auto h-full";
+    }
+    return "outline-1 p-2.5 rounded-2xl w-2xl mx-auto";
+  }, [xs]);
 
-  useEffect(() => {
-    const vv = window?.visualViewport;
-    if (!vv) return;
+  const editor = useEditor({
+    extensions: EXTENSIONS,
+    content: value,
+    editorProps: {
+      attributes: {
+        class: styleEditor,
+      },
+    },
+    onUpdate(e) {
+      const editor = e?.editor;
 
-    const update = () => {
-      const offset = Math.max(
-        0,
-        window.innerHeight - vv?.height - vv?.offsetTop,
-      );
-      setKeyboardOffset(offset);
-    };
+      onChange(editor?.getHTML(), e);
+    },
+  });
 
-    update();
-    vv.addEventListener("resize", update);
-    vv.addEventListener("scroll", update);
+  const readOnlyMobileEditor = useEditor({
+    extensions: EXTENSIONS,
+    content: value,
+    editorProps: {
+      attributes: {
+        class: styleEditor,
+      },
+    },
+  });
 
-    return () => {
-      vv.removeEventListener("resize", update);
-      vv.removeEventListener("scroll", update);
-    };
-  }, []);
-  return (
-    <>
-      {!xs && <Toolbar />}
-
-      <div
-        {...(isSourceMode && {
-          className: "hidden",
-        })}
-        {...(xs && {
-          onClick() {
-            setShowToolbarMobile(false);
-          },
-        })}
-      >
-        <EditorContent
-          editor={editor}
-          {...(xs && {
-            className: "h-full",
-          })}
-        />
-      </div>
-
-      <div
-        {...(!isSourceMode && {
-          style: {
-            display: "none",
-          },
-        })}
-      >
-        <EditorSourceMode />
-      </div>
-
-      {xs && (
-        <div
-          className="fixed left-0 right-0 z-50"
-          style={{
-            bottom: `${keyboardOffset}px`,
-          }}
-        >
-          <div className="w-full text-right pr-5 pb-5">
-            <Button
-              onClick={() => {
-                readOnlyMobileEditor
-                  .chain()
-                  ?.setContent(editor?.getJSON())
-                  ?.run();
-
-                setShowEditableEditorMobile(false);
-              }}
-            >
-              <Edit2 /> Done
-            </Button>
-          </div>
-
-          <ToolbarMobile
-            showToolbarMobile={showToolbarMobile}
-            setShowToolbarMobile={setShowToolbarMobile}
-          />
-        </div>
-      )}
-    </>
+  const providerValue = useMemo(
+    () => ({
+      editor,
+      readOnlyMobileEditor,
+      setSourceMode,
+      isSourceMode,
+      setShowEditableEditorMobile,
+    }),
+    [
+      editor,
+      setSourceMode,
+      isSourceMode,
+      readOnlyMobileEditor,
+      setShowEditableEditorMobile,
+    ],
   );
-};
 
-const Texteditor = memo(Texteditor_);
+  return (
+    <EditorPropsCtxProvider
+      locale={locale}
+      customTranslate={customTranslate}
+      value={value}
+    >
+      <EditorContext.Provider value={providerValue}>
+        <TooltipProvider>
+          {xs ? (
+            <Dialog
+              open={showEditableEditorMobile}
+              onOpenChange={setShowEditableEditorMobile}
+            >
+              <DialogTrigger asChild>
+                <div>
+                  <EditorPreviewMobile />
+                </div>
+              </DialogTrigger>
+
+              <DialogContent className="w-full h-full translate-0 inset-0 max-w-full">
+                <TexteditorContent />
+              </DialogContent>
+            </Dialog>
+          ) : (
+            <TexteditorContent />
+          )}
+        </TooltipProvider>
+      </EditorContext.Provider>
+    </EditorPropsCtxProvider>
+  );
+}
+
 export default Texteditor;

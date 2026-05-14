@@ -7,8 +7,9 @@ import { createContext, useContext } from "react";
 /**
  * @typedef TEditorPropsCtx
  * @property {TLang} locale
- * @property {Record<TLang, Record<string, string>>} customTranslate
- * @property {boolean} [disableMobileBehavior=false]
+ * @property {Record<TLang, Record<keyof typeof import('@/lib/locales')['EDITOR_LOCALES']['en'], string>>} [customTranslate={}]
+ * @property {string} value
+ * @property {(value: string | undefined, event: import('@tiptap/react').EditorEvents['update']) => void} onChange
  */
 
 /** @type {import("react").Context<TEditorPropsCtx>} */
