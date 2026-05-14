@@ -1,15 +1,11 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useEditorPropsCtx } from "@/context/EditorPropsCtx";
 
 const useToolbarConfig = () => {
-  const { disabledFeatures = [], toolbarConfig = {}, readOnly } =
-    useEditorPropsCtx();
+  const { toolbarConfig = {}, readOnly } = useEditorPropsCtx();
 
   const hiddenGroups = toolbarConfig?.hiddenGroups || [];
-  const hiddenItems = useMemo(
-    () => [...(toolbarConfig?.hiddenItems || []), ...disabledFeatures],
-    [disabledFeatures, toolbarConfig?.hiddenItems],
-  );
+  const hiddenItems = toolbarConfig?.hiddenItems || [];
 
   const checkShowToolbarGroup = useCallback(
     (group) => !readOnly && !hiddenGroups?.includes(group),

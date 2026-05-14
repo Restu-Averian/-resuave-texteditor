@@ -11,7 +11,7 @@ import { getExtensions } from "./helpers";
 
 /**
  *
- * @param {import("./context/EditorPropsCtx").TEditorPropsCtx} props
+ * @param {import("@/types").TEditorPropsCtx} props
 
  * @returns {React.ReactNode}
  */
@@ -22,7 +22,6 @@ function Texteditor({
   onChange,
   placeholder,
   readOnly = false,
-  disabledFeatures = [],
   toolbarConfig = {},
   className,
   editorClassName,
@@ -124,7 +123,6 @@ function Texteditor({
       customTranslate={customTranslate}
       value={value}
       readOnly={readOnly}
-      disabledFeatures={disabledFeatures}
       toolbarConfig={toolbarConfig}
       contentClassName={contentClassName}
     >

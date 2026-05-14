@@ -2,7 +2,7 @@ import EditorPropsCtx from "./EditorPropsCtx";
 
 /**
  *
- * @param {import("./EditorPropsCtx").TEditorPropsCtx} props
+ * @param {import("@/types").TEditorPropsCtx} props
  * @returns {import("react").ReactNode}
  */
 const EditorPropsCtxProvider = ({ children, ...props }) => {
