@@ -3,6 +3,21 @@ import { Tooltip as TooltipPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * @typedef {Object} TooltipBaseProps
+ * @property {string} [className]
+ * @property {React.ReactNode} [children]
+ */
+
+/**
+ * Provides tooltip configuration context.
+ *
+ * @typedef {Object} TooltipProviderProps
+ * @property {number} [delayDuration=0]
+ *
+ * @param {TooltipProviderProps & React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>} props
+ * @returns {JSX.Element}
+ */
 function TooltipProvider({ delayDuration = 0, ...props }) {
   return (
     <TooltipPrimitive.Provider
@@ -13,14 +28,37 @@ function TooltipProvider({ delayDuration = 0, ...props }) {
   );
 }
 
+/**
+ * Root tooltip component wrapping Radix Tooltip.Root.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>} props
+ * @returns {JSX.Element}
+ */
 function Tooltip({ ...props }) {
   return <TooltipPrimitive.Root data-slot="tooltip" {...props} />;
 }
 
+/**
+ * Element that triggers the tooltip on hover/focus.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>} props
+ * @returns {JSX.Element}
+ */
 function TooltipTrigger({ ...props }) {
   return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
+/**
+ * Tooltip content popup.
+ *
+ * @typedef {Object} TooltipContentProps
+ * @property {string} [className]
+ * @property {number} [sideOffset=0]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {TooltipContentProps & React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>} props
+ * @returns {JSX.Element}
+ */
 function TooltipContent({ className, sideOffset = 0, children, ...props }) {
   return (
     <TooltipPrimitive.Portal>

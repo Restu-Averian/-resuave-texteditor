@@ -4,24 +4,59 @@ import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { CheckIcon, ChevronRightIcon } from "lucide-react"
 
+/**
+ * @typedef {Object} DropdownMenuBaseProps
+ * @property {string} [className]
+ * @property {React.ReactNode} [children]
+ */
+
+/**
+ * Root dropdown menu component wrapping Radix DropdownMenu.Root.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Root>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenu({
   ...props
 }) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
 }
 
+/**
+ * Portal for rendering dropdown outside DOM tree.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Portal>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuPortal({
   ...props
 }) {
   return (<DropdownMenuPrimitive.Portal data-slot="dropdown-menu-portal" {...props} />);
 }
 
+/**
+ * Dropdown trigger button.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Trigger>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuTrigger({
   ...props
 }) {
   return (<DropdownMenuPrimitive.Trigger data-slot="dropdown-menu-trigger" {...props} />);
 }
 
+/**
+ * Dropdown content panel.
+ *
+ * @typedef {Object} DropdownMenuContentProps
+ * @property {string} [className]
+ * @property {"start" | "center" | "end"} [align="start"]
+ * @property {number} [sideOffset=4]
+ *
+ * @param {DropdownMenuContentProps & React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuContent({
   className,
   align = "start",
@@ -43,12 +78,30 @@ function DropdownMenuContent({
   );
 }
 
+/**
+ * Groups related dropdown items together.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Group>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuGroup({
   ...props
 }) {
   return (<DropdownMenuPrimitive.Group data-slot="dropdown-menu-group" {...props} />);
 }
 
+/**
+ * Individual dropdown menu item.
+ *
+ * @typedef {Object} DropdownMenuItemProps
+ * @property {string} [className]
+ * @property {boolean} [inset]
+ * @property {"default" | "destructive"} [variant="default"]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {DropdownMenuItemProps & React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuItem({
   className,
   inset,
@@ -68,6 +121,18 @@ function DropdownMenuItem({
   );
 }
 
+/**
+ * Dropdown item with checkbox state.
+ *
+ * @typedef {Object} DropdownMenuCheckboxItemProps
+ * @property {string} [className]
+ * @property {boolean} [checked]
+ * @property {boolean} [inset]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {DropdownMenuCheckboxItemProps & React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuCheckboxItem({
   className,
   children,
@@ -97,12 +162,29 @@ function DropdownMenuCheckboxItem({
   );
 }
 
+/**
+ * Radio group inside a dropdown.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioGroup>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuRadioGroup({
   ...props
 }) {
   return (<DropdownMenuPrimitive.RadioGroup data-slot="dropdown-menu-radio-group" {...props} />);
 }
 
+/**
+ * Dropdown item with radio state.
+ *
+ * @typedef {Object} DropdownMenuRadioItemProps
+ * @property {string} [className]
+ * @property {boolean} [inset]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {DropdownMenuRadioItemProps & React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuRadioItem({
   className,
   children,
@@ -130,6 +212,17 @@ function DropdownMenuRadioItem({
   );
 }
 
+/**
+ * Label for grouping items in a dropdown.
+ *
+ * @typedef {Object} DropdownMenuLabelProps
+ * @property {string} [className]
+ * @property {boolean} [inset]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {DropdownMenuLabelProps & React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuLabel({
   className,
   inset,
@@ -147,6 +240,12 @@ function DropdownMenuLabel({
   );
 }
 
+/**
+ * Visual separator between dropdown groups.
+ *
+ * @param {DropdownMenuBaseProps & React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuSeparator({
   className,
   ...props
@@ -159,6 +258,12 @@ function DropdownMenuSeparator({
   );
 }
 
+/**
+ * Keyboard shortcut hint text inside a dropdown item.
+ *
+ * @param {DropdownMenuBaseProps} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuShortcut({
   className,
   ...props
@@ -174,12 +279,29 @@ function DropdownMenuShortcut({
   );
 }
 
+/**
+ * Nested sub-menu root.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Sub>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuSub({
   ...props
 }) {
   return <DropdownMenuPrimitive.Sub data-slot="dropdown-menu-sub" {...props} />;
 }
 
+/**
+ * Trigger for opening a sub-menu.
+ *
+ * @typedef {Object} DropdownMenuSubTriggerProps
+ * @property {string} [className]
+ * @property {boolean} [inset]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {DropdownMenuSubTriggerProps & React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuSubTrigger({
   className,
   inset,
@@ -201,6 +323,12 @@ function DropdownMenuSubTrigger({
   );
 }
 
+/**
+ * Content panel for a sub-menu.
+ *
+ * @param {DropdownMenuBaseProps & React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>} props
+ * @returns {JSX.Element}
+ */
 function DropdownMenuSubContent({
   className,
   ...props

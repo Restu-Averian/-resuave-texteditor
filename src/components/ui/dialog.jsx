@@ -5,30 +5,66 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { XIcon } from "lucide-react"
 
+/**
+ * @typedef {Object} DialogBaseProps
+ * @property {string} [className]
+ * @property {React.ReactNode} [children]
+ */
+
+/**
+ * Root dialog component wrapping Radix Dialog.Root.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root>} props
+ * @returns {JSX.Element}
+ */
 function Dialog({
   ...props
 }) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;
 }
 
+/**
+ * Dialog trigger button — opens the dialog on click.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DialogPrimitive.Trigger>} props
+ * @returns {JSX.Element}
+ */
 function DialogTrigger({
   ...props
 }) {
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />;
 }
 
+/**
+ * Portal for rendering dialog content outside the DOM tree.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DialogPrimitive.Portal>} props
+ * @returns {JSX.Element}
+ */
 function DialogPortal({
   ...props
 }) {
   return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />;
 }
 
+/**
+ * Dialog close button.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>} props
+ * @returns {JSX.Element}
+ */
 function DialogClose({
   ...props
 }) {
   return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
 }
 
+/**
+ * Semi-transparent overlay behind the dialog.
+ *
+ * @param {DialogBaseProps} props
+ * @returns {JSX.Element}
+ */
 function DialogOverlay({
   className,
   ...props
@@ -44,6 +80,17 @@ function DialogOverlay({
   );
 }
 
+/**
+ * Dialog content panel with overlay, close button, and animations.
+ *
+ * @typedef {Object} DialogContentProps
+ * @property {string} [className]
+ * @property {boolean} [showCloseButton=true]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {DialogContentProps & React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>} props
+ * @returns {JSX.Element}
+ */
 function DialogContent({
   className,
   children,
@@ -74,6 +121,12 @@ function DialogContent({
   );
 }
 
+/**
+ * Dialog header section.
+ *
+ * @param {DialogBaseProps} props
+ * @returns {JSX.Element}
+ */
 function DialogHeader({
   className,
   ...props
@@ -86,6 +139,17 @@ function DialogHeader({
   );
 }
 
+/**
+ * Dialog footer section with optional close button.
+ *
+ * @typedef {Object} DialogFooterProps
+ * @property {string} [className]
+ * @property {boolean} [showCloseButton=false]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {DialogFooterProps & React.HTMLAttributes<HTMLDivElement>} props
+ * @returns {JSX.Element}
+ */
 function DialogFooter({
   className,
   showCloseButton = false,
@@ -107,6 +171,12 @@ function DialogFooter({
   );
 }
 
+/**
+ * Dialog title text.
+ *
+ * @param {DialogBaseProps & React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>} props
+ * @returns {JSX.Element}
+ */
 function DialogTitle({
   className,
   ...props
@@ -119,6 +189,12 @@ function DialogTitle({
   );
 }
 
+/**
+ * Dialog description text.
+ *
+ * @param {DialogBaseProps & React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>} props
+ * @returns {JSX.Element}
+ */
 function DialogDescription({
   className,
   ...props

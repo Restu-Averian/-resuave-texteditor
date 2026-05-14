@@ -4,6 +4,27 @@ import { Tabs as TabsPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * @typedef {Object} TabsBaseProps
+ * @property {string} [className]
+ * @property {React.ReactNode} [children]
+ */
+
+/**
+ * @typedef {"default" | "line"} TabsListVariant
+ */
+
+/**
+ * Root tabs component wrapping Radix Tabs.Root.
+ *
+ * @typedef {Object} TabsProps
+ * @property {string} [className]
+ * @property {"horizontal" | "vertical"} [orientation="horizontal"]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {TabsProps & React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root>} props
+ * @returns {JSX.Element}
+ */
 function Tabs({
   className,
   orientation = "horizontal",
@@ -33,6 +54,17 @@ const tabsListVariants = cva(
   }
 )
 
+/**
+ * Container for tab triggers.
+ *
+ * @typedef {Object} TabsListProps
+ * @property {string} [className]
+ * @property {TabsListVariant} [variant="default"]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {TabsListProps & React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>} props
+ * @returns {JSX.Element}
+ */
 function TabsList({
   className,
   variant = "default",
@@ -47,6 +79,12 @@ function TabsList({
   );
 }
 
+/**
+ * Individual tab trigger button.
+ *
+ * @param {TabsBaseProps & React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>} props
+ * @returns {JSX.Element}
+ */
 function TabsTrigger({
   className,
   ...props
@@ -65,6 +103,12 @@ function TabsTrigger({
   );
 }
 
+/**
+ * Content panel for a tab.
+ *
+ * @param {TabsBaseProps & React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>} props
+ * @returns {JSX.Element}
+ */
 function TabsContent({
   className,
   ...props
