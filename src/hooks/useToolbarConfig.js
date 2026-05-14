@@ -10,28 +10,30 @@ const useToolbarConfig = () => {
 
   const hiddenGroups = toolbarConfig?.hiddenGroups || [];
   const hiddenItems = toolbarConfig?.hiddenItems || [];
+  const checkDisableToolbarItem = readOnly && readOnlyToolbarMode === "disabled";
 
   const checkShowToolbarGroup = useCallback(
     (group) => {
-      if (readOnlyToolbarMode === "disabled") {
+      if (!readOnly || readOnlyToolbarMode === "disabled") {
         return !hiddenGroups?.includes(group);
       }
-      return !readOnly && !hiddenGroups?.includes(group);
+      return false;
     },
     [hiddenGroups, readOnly, readOnlyToolbarMode],
   );
 
   const checkShowToolbarItem = useCallback(
     (item) => {
-      if (readOnlyToolbarMode === "disabled") {
+      if (!readOnly || readOnlyToolbarMode === "disabled") {
         return !hiddenItems?.includes(item);
       }
-      return !readOnly && !hiddenItems?.includes(item);
+      return false;
     },
     [hiddenItems, readOnly, readOnlyToolbarMode],
   );
 
   return {
+    checkDisableToolbarItem,
     checkShowToolbarGroup,
     checkShowToolbarItem,
   };

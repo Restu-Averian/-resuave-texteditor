@@ -17,7 +17,8 @@ import useToolbarConfig from "@/hooks/useToolbarConfig";
 
 const ToolbarMobile_ = ({ showToolbarMobile, setShowToolbarMobile }) => {
   const { editor } = useCurrentEditor();
-  const { checkShowToolbarGroup } = useToolbarConfig();
+  const { checkDisableToolbarItem, checkShowToolbarGroup } =
+    useToolbarConfig();
 
   const tabList = useMemo(() => {
     return [
@@ -62,6 +63,8 @@ const ToolbarMobile_ = ({ showToolbarMobile, setShowToolbarMobile }) => {
       })}
       onValueChange={() => {
         setShowToolbarMobile(true);
+
+        if (checkDisableToolbarItem) return;
 
         setTimeout(() => {
           editor?.chain().focus().run();

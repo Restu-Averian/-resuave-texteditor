@@ -20,7 +20,11 @@ const ToolbarLists_ = () => {
   const t = useTranslation();
 
   const { editor, isSourceMode } = useCurrentEditor();
-  const { checkShowToolbarItem } = useToolbarConfig();
+  const { checkDisableToolbarItem, checkShowToolbarItem } = useToolbarConfig();
+  const isDisabled = useMemo(
+    () => isSourceMode || checkDisableToolbarItem,
+    [isSourceMode, checkDisableToolbarItem],
+  );
 
   const editorState = useEditorState({
     editor,
@@ -55,7 +59,7 @@ const ToolbarLists_ = () => {
       <ResponsiveWrapperToolbarItem className="flex justify-center items-center">
         {checkShowToolbarItem("bulletList") && (
           <ToolbarItem
-            disabled={isSourceMode}
+            disabled={isDisabled}
             icon={<List />}
             onClick={() => editor?.chain()?.focus()?.toggleBulletList()?.run()}
             label={t("BULLET_LIST", "Bullet List")}
@@ -64,7 +68,7 @@ const ToolbarLists_ = () => {
 
         {checkShowToolbarItem("orderedList") && (
           <ToolbarItem
-            disabled={isSourceMode}
+            disabled={isDisabled}
             isActive={editorState?.isOrderedList}
             icon={<ListOrdered />}
             onClick={() => editor?.chain()?.focus()?.toggleOrderedList()?.run()}
@@ -74,7 +78,7 @@ const ToolbarLists_ = () => {
 
         {checkShowToolbarItem("taskList") && (
           <ToolbarItem
-            disabled={isSourceMode}
+            disabled={isDisabled}
             isActive={editorState?.isTaskList}
             icon={<ListTodo />}
             onClick={() => editor?.chain()?.focus()?.toggleTaskList()?.run()}
@@ -92,7 +96,7 @@ const ToolbarLists_ = () => {
             onValueChange={(value) => {
               editor?.chain()?.focus()?.toggleTextAlign(value)?.run();
             }}
-            disabled={isSourceMode}
+            disabled={isDisabled}
           >
             {checkShowToolbarItem("alignLeft") && (
               <Tooltip content={t("ALIGN_LEFT", "Align Left")}>

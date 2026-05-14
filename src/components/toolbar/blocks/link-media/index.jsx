@@ -27,7 +27,11 @@ const ToolbarLinkMedia_ = () => {
   const t = useTranslation();
 
   const { editor, isSourceMode } = useCurrentEditor();
-  const { checkShowToolbarItem } = useToolbarConfig();
+  const { checkDisableToolbarItem, checkShowToolbarItem } = useToolbarConfig();
+  const isDisabled = useMemo(
+    () => isSourceMode || checkDisableToolbarItem,
+    [isSourceMode, checkDisableToolbarItem],
+  );
 
   const editorState = useEditorState({
     editor,
@@ -90,7 +94,7 @@ const ToolbarLinkMedia_ = () => {
         onClick={() =>
           editor.chain().focus().extendMarkRange("link").unsetLink().run()
         }
-        disabled={isSourceMode}
+        disabled={isDisabled}
       />
     );
   }
@@ -109,7 +113,7 @@ const ToolbarLinkMedia_ = () => {
       >
         <Tooltip content={t("SET_LINK", "Set Link")}>
           <PopoverTrigger asChild>
-            <Button variant="ghost" disabled={isSourceMode}>
+            <Button variant="ghost" disabled={isDisabled}>
               <Link2 />
             </Button>
           </PopoverTrigger>
@@ -122,7 +126,7 @@ const ToolbarLinkMedia_ = () => {
                 <Field>
                   <FieldLabel htmlFor="link">{t("LINK", "Link")}</FieldLabel>
                   <Input
-                    disabled={isSourceMode}
+                    disabled={isDisabled}
                     id="link"
                     autoComplete="off"
                     placeholder={t("LINK_PLACEHOLDER", "example.com")}
@@ -151,7 +155,7 @@ const ToolbarLinkMedia_ = () => {
                       {t("TEXT_TO_SHOW", "Text to Show")}
                     </FieldLabel>
                     <Input
-                      disabled={isSourceMode}
+                      disabled={isDisabled}
                       id="text-to-show"
                       autoComplete="off"
                       value={textToShow}
@@ -168,7 +172,7 @@ const ToolbarLinkMedia_ = () => {
           <Button
             onClick={onApplyLink}
             className="w-full"
-            disabled={isSourceMode}
+            disabled={isDisabled}
           >
             {t("APPLY", "Apply")}
           </Button>

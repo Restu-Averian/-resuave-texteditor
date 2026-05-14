@@ -17,7 +17,8 @@ const TexteditorContent_ = () => {
     setShowEditableEditorMobile,
   } = useCurrentEditor();
 
-  const { value, readOnly, contentClassName } = useEditorPropsCtx();
+  const { value, readOnly, readOnlyToolbarMode, contentClassName } =
+    useEditorPropsCtx();
 
   const { xs } = useBreakpoint();
 
@@ -45,6 +46,8 @@ const TexteditorContent_ = () => {
       vv.removeEventListener("scroll", update);
     };
   }, []);
+  const showReadOnlyToolbar = readOnly && readOnlyToolbarMode === "disabled";
+
   return (
     <>
       <Toolbar />
@@ -78,27 +81,29 @@ const TexteditorContent_ = () => {
         </div>
       )}
 
-      {xs && !readOnly && (
+      {xs && (!readOnly || showReadOnlyToolbar) && (
         <div
           className="fixed left-0 right-0 z-50"
           style={{
             bottom: `${keyboardOffset}px`,
           }}
         >
-          <div className="w-full text-right pr-5 pb-5">
-            <Button
-              onClick={() => {
-                readOnlyMobileEditor
-                  .chain()
-                  ?.setContent(editor?.getJSON())
-                  ?.run();
+          {!readOnly && (
+            <div className="w-full text-right pr-5 pb-5">
+              <Button
+                onClick={() => {
+                  readOnlyMobileEditor
+                    .chain()
+                    ?.setContent(editor?.getJSON())
+                    ?.run();
 
-                setShowEditableEditorMobile(false);
-              }}
-            >
-              <Edit2 /> Done
-            </Button>
-          </div>
+                  setShowEditableEditorMobile(false);
+                }}
+              >
+                <Edit2 /> Done
+              </Button>
+            </div>
+          )}
 
           <ToolbarMobile
             showToolbarMobile={showToolbarMobile}

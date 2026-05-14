@@ -34,7 +34,12 @@ const HeadingItem_ = () => {
   const t = useTranslation();
 
   const { editor, isSourceMode } = useCurrentEditor();
-  const { checkShowToolbarItem } = useToolbarConfig();
+  const { checkDisableToolbarItem, checkShowToolbarItem } = useToolbarConfig();
+
+  const isDisabled = useMemo(
+    () => isSourceMode || checkDisableToolbarItem,
+    [isSourceMode, checkDisableToolbarItem],
+  );
 
   const editorState = useEditorState({
     editor,
@@ -68,7 +73,7 @@ const HeadingItem_ = () => {
         <DropdownMenuTrigger asChild>
           <Button
             variant={isActiveHeading ? "default" : "ghost"}
-            disabled={isSourceMode}
+            disabled={isDisabled}
           >
             <Heading />
           </Button>
@@ -86,12 +91,19 @@ const HeadingItem_ = () => {
             return (
               <DropdownMenuItem
                 key={idx}
+                disabled={isDisabled}
                 onClick={() => {
-                  editor.chain().focus().toggleHeading({ level: level }).run();
+                  if (!isDisabled) {
+                    editor
+                      .chain()
+                      .focus()
+                      .toggleHeading({ level: level })
+                      .run();
+                  }
                 }}
               >
                 <Button
-                  disabled={isSourceMode}
+                  disabled={isDisabled}
                   variant={
                     editorState?.[`isHeading${level}`] ? "default" : "ghost"
                   }

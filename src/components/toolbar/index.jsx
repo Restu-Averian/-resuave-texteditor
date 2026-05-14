@@ -10,11 +10,11 @@ import { useEditorPropsCtx } from "@/context/EditorPropsCtx";
 
 const Toolbar_ = () => {
   const { checkShowToolbarGroup } = useToolbarConfig();
-  const { readOnlyToolbarMode } = useEditorPropsCtx();
+  const { readOnly, readOnlyToolbarMode } = useEditorPropsCtx();
 
   const { xs } = useBreakpoint();
 
-  if (!xs && readOnlyToolbarMode === "disabled") {
+  if (!xs && (!readOnly || readOnlyToolbarMode === "disabled")) {
     return (
       <div className="toolbar">
         <div className="toolbar-item">
