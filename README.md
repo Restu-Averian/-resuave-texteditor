@@ -43,6 +43,8 @@ function App() {
 | --------------------- | -------------------------------------------- | ---------- | ---------------------------------------- |
 | `value`               | `string`                                     | required   | Initial HTML content                     |
 | `onChange`            | `(html: string \| undefined, event) => void` | required   | Called on every editor update            |
+| `onFocus`             | `(html: string \| undefined, event) => void` | —          | Called when editor gains focus            |
+| `onBlur`              | `(html: string \| undefined, event) => void` | —          | Called when editor loses focus            |
 | `locale`              | `"en" \| "id"`                               | `"en"`     | UI language                              |
 | `customTranslate`     | `object`                                     | `{}`       | Override translation keys per locale     |
 | `placeholder`         | `string`                                     | —          | Placeholder text when editor is empty    |
