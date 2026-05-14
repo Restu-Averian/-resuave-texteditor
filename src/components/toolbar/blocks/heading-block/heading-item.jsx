@@ -19,6 +19,7 @@ import {
 import { memo, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import Tooltip from "@/components/ui/shared/tooltip";
+import useToolbarConfig from "@/hooks/useToolbarConfig";
 
 const HEADING_ICON = {
   1: <Heading1 />,
@@ -33,6 +34,7 @@ const HeadingItem_ = () => {
   const t = useTranslation();
 
   const { editor, isSourceMode } = useCurrentEditor();
+  const { checkShowToolbarItem } = useToolbarConfig();
 
   const editorState = useEditorState({
     editor,
@@ -77,6 +79,10 @@ const HeadingItem_ = () => {
         <DropdownMenuGroup>
           {Array.from({ length: 6 })?.map((_, idx) => {
             const level = idx + 1;
+            if (!checkShowToolbarItem(`heading${level}`)) {
+              return null;
+            }
+
             return (
               <DropdownMenuItem
                 key={idx}

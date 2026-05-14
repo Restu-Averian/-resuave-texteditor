@@ -15,6 +15,10 @@ createRoot(document.getElementById("root")).render(
           BOLD: "Penghitaman",
         },
       }}
+      toolbarConfig={{
+        hiddenItems: ["heading", "horizontalRule"],
+        hiddenGroups: ["actions"],
+      }}
     />
   </StrictMode>,
 );

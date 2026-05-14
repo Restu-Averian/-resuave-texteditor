@@ -13,39 +13,46 @@ import { useCurrentEditor } from "@tiptap/react";
 import ToolbarLinkMedia from "./blocks/link-media";
 import ToolbarHeadingBlock from "./blocks/heading-block";
 import ToolbarActions from "./blocks/actions";
+import useToolbarConfig from "@/hooks/useToolbarConfig";
 
 const ToolbarMobile_ = ({ showToolbarMobile, setShowToolbarMobile }) => {
   const { editor } = useCurrentEditor();
+  const { checkShowToolbarGroup } = useToolbarConfig();
 
   const tabList = useMemo(() => {
     return [
       {
         value: "text-style",
+        group: "textStyle",
         icon: <CaseSensitive />,
         content: <ToolbarTextStyle />,
       },
       {
         value: "list",
+        group: "lists",
         icon: <LayoutList />,
         content: <ToolbarLists />,
       },
       {
         value: "link",
+        group: "linkMedia",
         icon: <Link />,
         content: <ToolbarLinkMedia />,
       },
       {
         value: "heading-block",
+        group: "headingBlock",
         icon: <Heading />,
         content: <ToolbarHeadingBlock />,
       },
       {
         value: "actions",
+        group: "actions",
         icon: <Settings />,
         content: <ToolbarActions />,
       },
-    ];
-  }, []);
+    ]?.filter((tab) => checkShowToolbarGroup(tab?.group));
+  }, [checkShowToolbarGroup]);
 
   return (
     <Tabs

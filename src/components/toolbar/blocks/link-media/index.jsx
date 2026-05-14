@@ -21,11 +21,13 @@ import {
 } from "@/components/ui/field";
 import ToolbarItem from "../../components/toolbar-item";
 import ResponsiveWrapperToolbarItem from "../../components/responsive-wrapper-toolbar-item";
+import useToolbarConfig from "@/hooks/useToolbarConfig";
 
 const ToolbarLinkMedia_ = () => {
   const t = useTranslation();
 
   const { editor, isSourceMode } = useCurrentEditor();
+  const { checkShowToolbarItem } = useToolbarConfig();
 
   const editorState = useEditorState({
     editor,
@@ -80,7 +82,7 @@ const ToolbarLinkMedia_ = () => {
     setTextToShow("");
   };
 
-  if (editorState?.isLink) {
+  if (editorState?.isLink && checkShowToolbarItem("removeLink")) {
     return (
       <ToolbarItem
         icon={<Link2Off />}
@@ -92,6 +94,10 @@ const ToolbarLinkMedia_ = () => {
       />
     );
   }
+  if (!checkShowToolbarItem("link")) {
+    return null;
+  }
+
   return (
     <ResponsiveWrapperToolbarItem className="flex justify-center items-center">
       <Popover

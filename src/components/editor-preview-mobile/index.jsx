@@ -1,18 +1,29 @@
 import { EditorContent, useCurrentEditor } from "@tiptap/react";
 import { memo } from "react";
 import ToolbarTextStyle from "../toolbar/blocks/text-style";
+import { useEditorPropsCtx } from "@/context/EditorPropsCtx";
+import useToolbarConfig from "@/hooks/useToolbarConfig";
+import { cn } from "@/lib/utils";
 
 const EditorPreviewMobile_ = () => {
   const { readOnlyMobileEditor } = useCurrentEditor();
+  const { contentClassName } = useEditorPropsCtx();
+  const { checkShowToolbarGroup } = useToolbarConfig();
+
   return (
     <>
-      <div className="toolbar">
-        <div className="toolbar-item">
-          <ToolbarTextStyle />
+      {checkShowToolbarGroup("textStyle") && (
+        <div className="toolbar">
+          <div className="toolbar-item">
+            <ToolbarTextStyle />
+          </div>
         </div>
-      </div>
+      )}
 
-      <EditorContent editor={readOnlyMobileEditor} />
+      <EditorContent
+        editor={readOnlyMobileEditor}
+        className={cn(contentClassName)}
+      />
     </>
   );
 };

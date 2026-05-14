@@ -7,6 +7,7 @@ import ToolbarMobile from "./components/toolbar/toolbar-mobile";
 import { Button } from "./components/ui/button";
 import { Edit2 } from "lucide-react";
 import { useEditorPropsCtx } from "./context/EditorPropsCtx";
+import { cn } from "./lib/utils";
 
 const TexteditorContent_ = () => {
   const {
@@ -16,7 +17,7 @@ const TexteditorContent_ = () => {
     setShowEditableEditorMobile,
   } = useCurrentEditor();
 
-  const { value } = useEditorPropsCtx();
+  const { value, readOnly, contentClassName } = useEditorPropsCtx();
 
   const { xs } = useBreakpoint();
 
@@ -46,7 +47,7 @@ const TexteditorContent_ = () => {
   }, []);
   return (
     <>
-      {!xs && <Toolbar />}
+      {!xs && !readOnly && <Toolbar />}
 
       <div
         {...(isSourceMode && {
@@ -61,23 +62,23 @@ const TexteditorContent_ = () => {
         <EditorContent
           editor={editor}
           value={value}
-          {...(xs && {
-            className: "h-full",
-          })}
+          className={cn(xs && "h-full", contentClassName)}
         />
       </div>
 
-      <div
-        {...(!isSourceMode && {
-          style: {
-            display: "none",
-          },
-        })}
-      >
-        <EditorSourceMode />
-      </div>
+      {!readOnly && (
+        <div
+          {...(!isSourceMode && {
+            style: {
+              display: "none",
+            },
+          })}
+        >
+          <EditorSourceMode />
+        </div>
+      )}
 
-      {xs && (
+      {xs && !readOnly && (
         <div
           className="fixed left-0 right-0 z-50"
           style={{

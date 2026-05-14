@@ -1,3 +1,9 @@
+import { TaskItem, TaskList } from "@tiptap/extension-list";
+import TextAlign from "@tiptap/extension-text-align";
+import { TextStyleKit } from "@tiptap/extension-text-style";
+import StarterKit from "@tiptap/starter-kit";
+import { Placeholder, Selection } from "@tiptap/extensions";
+
 export const normalizeUrl = (value) => {
   const trimmed = value?.trim();
 
@@ -29,3 +35,26 @@ export const validateUrl = (value) => {
     return "Invalid link format.";
   }
 };
+
+export const getExtensions = (placeholder) => [
+  StarterKit,
+  TextStyleKit,
+  TaskList,
+  TaskItem?.configure({
+    nested: true,
+  }),
+  TextAlign?.configure({
+    types: ["heading", "paragraph"],
+  }),
+  Selection.configure({
+    className: "selection",
+  }),
+  ...(placeholder
+    ? [
+        Placeholder.configure({
+          placeholder,
+          showOnlyWhenEditable: false,
+        }),
+      ]
+    : []),
+];

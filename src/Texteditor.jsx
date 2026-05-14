@@ -1,12 +1,13 @@
 import { EditorContext, useEditor } from "@tiptap/react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { TooltipProvider } from "./components/ui/tooltip";
 import EditorPropsCtxProvider from "./context/EditorPropsCtxProvider";
 import useBreakpoint from "./hooks/useBreakpoint";
 import TexteditorContent from "./TexteditorContent";
-import { EXTENSIONS } from "./constants";
 import EditorPreviewMobile from "./components/editor-preview-mobile";
+import { cn } from "./lib/utils";
+import { getExtensions } from "./helpers";
 
 /**
  *
@@ -14,44 +15,91 @@ import EditorPreviewMobile from "./components/editor-preview-mobile";
 
  * @returns {React.ReactNode}
  */
-function Texteditor({ locale = "en", customTranslate = {}, value, onChange }) {
+function Texteditor({
+  locale = "en",
+  customTranslate = {},
+  value,
+  onChange,
+  placeholder,
+  readOnly = false,
+  disabledFeatures = [],
+  toolbarConfig = {},
+  className,
+  editorClassName,
+  contentClassName,
+}) {
   const [isSourceMode, setSourceMode] = useState(false);
   const [showEditableEditorMobile, setShowEditableEditorMobile] =
     useState(false);
 
   const { xs } = useBreakpoint();
 
-  const styleEditor = useMemo(() => {
+  const defaultClassEditor = useMemo(() => {
     if (xs) {
       return "p-2.5 rounded-2xl w-full mx-auto h-full";
     }
     return "outline-1 p-2.5 rounded-2xl w-2xl mx-auto";
   }, [xs]);
 
-  const editor = useEditor({
-    extensions: EXTENSIONS,
-    content: value,
-    editorProps: {
-      attributes: {
-        class: styleEditor,
+  const extensions = useMemo(() => getExtensions(placeholder), [placeholder]);
+
+  const editor = useEditor(
+    {
+      extensions,
+      content: value,
+      editable: !readOnly,
+      editorProps: {
+        attributes: {
+          class: cn(defaultClassEditor, editorClassName),
+        },
+      },
+      onUpdate(e) {
+        const editor = e?.editor;
+
+        onChange?.(editor?.getHTML(), e);
       },
     },
-    onUpdate(e) {
-      const editor = e?.editor;
+    [extensions],
+  );
 
-      onChange(editor?.getHTML(), e);
-    },
-  });
-
-  const readOnlyMobileEditor = useEditor({
-    extensions: EXTENSIONS,
-    content: value,
-    editorProps: {
-      attributes: {
-        class: styleEditor,
+  const readOnlyMobileEditor = useEditor(
+    {
+      extensions,
+      content: value,
+      editable: false,
+      editorProps: {
+        attributes: {
+          class: cn(defaultClassEditor, editorClassName),
+        },
       },
     },
-  });
+    [extensions],
+  );
+
+  useEffect(() => {
+    editor?.setEditable(!readOnly);
+    if (readOnly) {
+      setSourceMode(false);
+    }
+  }, [editor, readOnly]);
+
+  useEffect(() => {
+    editor?.setOptions({
+      editorProps: {
+        attributes: {
+          class: cn(defaultClassEditor, editorClassName),
+        },
+      },
+    });
+
+    readOnlyMobileEditor?.setOptions({
+      editorProps: {
+        attributes: {
+          class: cn(defaultClassEditor, editorClassName),
+        },
+      },
+    });
+  }, [editor, readOnlyMobileEditor, defaultClassEditor, editorClassName]);
 
   const providerValue = useMemo(
     () => ({
@@ -75,29 +123,35 @@ function Texteditor({ locale = "en", customTranslate = {}, value, onChange }) {
       locale={locale}
       customTranslate={customTranslate}
       value={value}
+      readOnly={readOnly}
+      disabledFeatures={disabledFeatures}
+      toolbarConfig={toolbarConfig}
+      contentClassName={contentClassName}
     >
-      <EditorContext.Provider value={providerValue}>
-        <TooltipProvider>
-          {xs ? (
-            <Dialog
-              open={showEditableEditorMobile}
-              onOpenChange={setShowEditableEditorMobile}
-            >
-              <DialogTrigger asChild>
-                <div>
-                  <EditorPreviewMobile />
-                </div>
-              </DialogTrigger>
+      <div className={className}>
+        <EditorContext.Provider value={providerValue}>
+          <TooltipProvider>
+            {xs && !readOnly ? (
+              <Dialog
+                open={showEditableEditorMobile}
+                onOpenChange={setShowEditableEditorMobile}
+              >
+                <DialogTrigger asChild>
+                  <div>
+                    <EditorPreviewMobile />
+                  </div>
+                </DialogTrigger>
 
-              <DialogContent className="w-full h-full translate-0 inset-0 max-w-full">
-                <TexteditorContent />
-              </DialogContent>
-            </Dialog>
-          ) : (
-            <TexteditorContent />
-          )}
-        </TooltipProvider>
-      </EditorContext.Provider>
+                <DialogContent className="w-full h-full translate-0 inset-0 max-w-full">
+                  <TexteditorContent />
+                </DialogContent>
+              </Dialog>
+            ) : (
+              <TexteditorContent />
+            )}
+          </TooltipProvider>
+        </EditorContext.Provider>
+      </div>
     </EditorPropsCtxProvider>
   );
 }
