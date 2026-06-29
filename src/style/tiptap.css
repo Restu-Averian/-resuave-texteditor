@@ -1,9 +1,16 @@
 .ProseMirror {
+  box-sizing: border-box;
   color: inherit;
   font: inherit;
   line-height: 1.6;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 .ProseMirror > *:first-child {
@@ -361,4 +368,11 @@
 .ProseMirror blockquote + p,
 .ProseMirror pre + p {
   margin-top: 0.5em;
+}
+
+.tiptap ::selection {
+  background: hsl(220 90% 56% / 0.28);
+}
+.tiptap .selection {
+  background: hsl(220 90% 56% / 0.28);
 }

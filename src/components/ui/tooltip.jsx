@@ -1,0 +1,81 @@
+import * as React from "react";
+import { Tooltip as TooltipPrimitive } from "radix-ui";
+
+import { cn } from "@/lib/utils";
+
+/**
+ * @typedef {Object} TooltipBaseProps
+ * @property {string} [className]
+ * @property {React.ReactNode} [children]
+ */
+
+/**
+ * Provides tooltip configuration context.
+ *
+ * @typedef {Object} TooltipProviderProps
+ * @property {number} [delayDuration=0]
+ *
+ * @param {TooltipProviderProps & React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>} props
+ * @returns {JSX.Element}
+ */
+function TooltipProvider({ delayDuration = 0, ...props }) {
+  return (
+    <TooltipPrimitive.Provider
+      data-slot="tooltip-provider"
+      delayDuration={delayDuration}
+      {...props}
+    />
+  );
+}
+
+/**
+ * Root tooltip component wrapping Radix Tooltip.Root.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>} props
+ * @returns {JSX.Element}
+ */
+function Tooltip({ ...props }) {
+  return <TooltipPrimitive.Root data-slot="tooltip" {...props} />;
+}
+
+/**
+ * Element that triggers the tooltip on hover/focus.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>} props
+ * @returns {JSX.Element}
+ */
+function TooltipTrigger({ ...props }) {
+  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
+}
+
+/**
+ * Tooltip content popup.
+ *
+ * @typedef {Object} TooltipContentProps
+ * @property {string} [className]
+ * @property {number} [sideOffset=0]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {TooltipContentProps & React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>} props
+ * @returns {JSX.Element}
+ */
+function TooltipContent({ className, sideOffset = 0, children, ...props }) {
+  return (
+    <TooltipPrimitive.Portal>
+      <TooltipPrimitive.Content
+        data-slot="tooltip-content"
+        sideOffset={sideOffset}
+        className={cn(
+          "z-50 inline-flex w-fit max-w-xs origin-(--radix-tooltip-content-transform-origin) items-center gap-1.5 rounded-md bg-foreground px-3 py-1.5 text-xs text-background has-data-[slot=kbd]:pr-1.5 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 **:data-[slot=kbd]:relative **:data-[slot=kbd]:isolate **:data-[slot=kbd]:z-50 **:data-[slot=kbd]:rounded-sm data-[state=delayed-open]:animate-in data-[state=delayed-open]:fade-in-0 data-[state=delayed-open]:zoom-in-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        <TooltipPrimitive.Arrow className="z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px] bg-foreground fill-foreground" />
+      </TooltipPrimitive.Content>
+    </TooltipPrimitive.Portal>
+  );
+}
+
+export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };

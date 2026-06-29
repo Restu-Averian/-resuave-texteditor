@@ -3,18 +3,47 @@ import { Popover as PopoverPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * @typedef {Object} PopoverBaseProps
+ * @property {string} [className]
+ * @property {React.ReactNode} [children]
+ */
+
+/**
+ * Root popover component wrapping Radix Popover.Root.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Root>} props
+ * @returns {JSX.Element}
+ */
 function Popover({
   ...props
 }) {
   return <PopoverPrimitive.Root data-slot="popover" {...props} />;
 }
 
+/**
+ * Trigger button that opens the popover.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Trigger>} props
+ * @returns {JSX.Element}
+ */
 function PopoverTrigger({
   ...props
 }) {
   return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />;
 }
 
+/**
+ * Popover content panel.
+ *
+ * @typedef {Object} PopoverContentProps
+ * @property {string} [className]
+ * @property {"start" | "center" | "end"} [align="center"]
+ * @property {number} [sideOffset=4]
+ *
+ * @param {PopoverContentProps & React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>} props
+ * @returns {JSX.Element}
+ */
 function PopoverContent({
   className,
   align = "center",
@@ -36,12 +65,24 @@ function PopoverContent({
   );
 }
 
+/**
+ * Anchor element for positioning the popover.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Anchor>} props
+ * @returns {JSX.Element}
+ */
 function PopoverAnchor({
   ...props
 }) {
   return <PopoverPrimitive.Anchor data-slot="popover-anchor" {...props} />;
 }
 
+/**
+ * Header section inside the popover content.
+ *
+ * @param {PopoverBaseProps & React.HTMLAttributes<HTMLDivElement>} props
+ * @returns {JSX.Element}
+ */
 function PopoverHeader({
   className,
   ...props
@@ -54,6 +95,12 @@ function PopoverHeader({
   );
 }
 
+/**
+ * Title text inside the popover header.
+ *
+ * @param {PopoverBaseProps & React.HTMLAttributes<HTMLDivElement>} props
+ * @returns {JSX.Element}
+ */
 function PopoverTitle({
   className,
   ...props
@@ -66,6 +113,12 @@ function PopoverTitle({
   );
 }
 
+/**
+ * Description text inside popover content.
+ *
+ * @param {PopoverBaseProps & React.HTMLAttributes<HTMLParagraphElement>} props
+ * @returns {JSX.Element}
+ */
 function PopoverDescription({
   className,
   ...props

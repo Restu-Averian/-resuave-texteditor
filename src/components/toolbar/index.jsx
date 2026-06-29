@@ -1,28 +1,40 @@
 import { memo } from "react";
-import ToolbarTextStyle from "./ToolbarTextStyle";
-import ToolbarHeadingBlock from "./ToolbarHeadingBlock";
-import ToolbarLists from "./ToolbarLists";
-import ToolbarLinkMedia from "./ToolbarLinkMedia";
-import ToolbarActions from "./ToolbarActions";
+import ToolbarTextStyle from "./blocks/text-style";
+import ToolbarLists from "./blocks/lists";
+import ToolbarLinkMedia from "./blocks/link-media";
+import ToolbarActions from "./blocks/actions";
+import ToolbarHeadingBlock from "./blocks/heading-block";
+import useToolbarConfig from "@/hooks/useToolbarConfig";
+import useBreakpoint from "@/hooks/useBreakpoint";
+import { useEditorPropsCtx } from "@/context/EditorPropsCtx";
 
 const Toolbar_ = () => {
-  return (
-    <div className="toolbar">
-      <div className="toolbar-item">
-        <ToolbarTextStyle />
+  const { checkShowToolbarGroup } = useToolbarConfig();
+  const { readOnly, readOnlyToolbarMode } = useEditorPropsCtx();
 
-        <ToolbarHeadingBlock />
+  const { xs } = useBreakpoint();
 
-        <ToolbarLists />
+  if (!xs && (!readOnly || readOnlyToolbarMode === "disabled")) {
+    return (
+      <div className="toolbar">
+        <div className="toolbar-item">
+          {checkShowToolbarGroup("textStyle") && <ToolbarTextStyle />}
+
+          {checkShowToolbarGroup("headingBlock") && <ToolbarHeadingBlock />}
+
+          {checkShowToolbarGroup("lists") && <ToolbarLists />}
+        </div>
+
+        <div className="toolbar-item">
+          {checkShowToolbarGroup("linkMedia") && <ToolbarLinkMedia />}
+
+          {checkShowToolbarGroup("actions") && <ToolbarActions />}
+        </div>
       </div>
+    );
+  }
 
-      <div className="toolbar-item">
-        <ToolbarLinkMedia />
-
-        <ToolbarActions />
-      </div>
-    </div>
-  );
+  return null;
 };
 
 const Toolbar = memo(Toolbar_);

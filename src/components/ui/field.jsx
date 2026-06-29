@@ -5,6 +5,22 @@ import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 
+/**
+ * @typedef {Object} FieldBaseProps
+ * @property {string} [className]
+ * @property {React.ReactNode} [children]
+ */
+
+/**
+ * @typedef {"vertical" | "horizontal" | "responsive"} FieldOrientation
+ */
+
+/**
+ * Root <fieldset> wrapper for grouping fields.
+ *
+ * @param {FieldBaseProps & React.HTMLAttributes<HTMLFieldSetElement>} props
+ * @returns {JSX.Element}
+ */
 function FieldSet({
   className,
   ...props
@@ -20,6 +36,17 @@ function FieldSet({
   );
 }
 
+/**
+ * <legend> inside a FieldSet.
+ *
+ * @typedef {Object} FieldLegendProps
+ * @property {string} [className]
+ * @property {"label" | "legend"} [variant="legend"]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {FieldLegendProps & React.HTMLAttributes<HTMLLegendElement>} props
+ * @returns {JSX.Element}
+ */
 function FieldLegend({
   className,
   variant = "legend",
@@ -37,6 +64,12 @@ function FieldLegend({
   );
 }
 
+/**
+ * Groups multiple Field components together.
+ *
+ * @param {FieldBaseProps & React.HTMLAttributes<HTMLDivElement>} props
+ * @returns {JSX.Element}
+ */
 function FieldGroup({
   className,
   ...props
@@ -67,6 +100,17 @@ const fieldVariants = cva("group/field flex w-full gap-3 data-[invalid=true]:tex
   },
 })
 
+/**
+ * A single field row with label, content, and error.
+ *
+ * @typedef {Object} FieldProps
+ * @property {string} [className]
+ * @property {FieldOrientation} [orientation="vertical"]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {FieldProps & React.HTMLAttributes<HTMLDivElement>} props
+ * @returns {JSX.Element}
+ */
 function Field({
   className,
   orientation = "vertical",
@@ -82,6 +126,12 @@ function Field({
   );
 }
 
+/**
+ * Content area of a field (input, select, etc.).
+ *
+ * @param {FieldBaseProps & React.HTMLAttributes<HTMLDivElement>} props
+ * @returns {JSX.Element}
+ */
 function FieldContent({
   className,
   ...props
@@ -94,6 +144,12 @@ function FieldContent({
   );
 }
 
+/**
+ * Label for a field, wraps Radix Label.
+ *
+ * @param {FieldBaseProps & React.ComponentPropsWithoutRef<typeof Label>} props
+ * @returns {JSX.Element}
+ */
 function FieldLabel({
   className,
   ...props
@@ -110,6 +166,12 @@ function FieldLabel({
   );
 }
 
+/**
+ * Title text inside a field label area.
+ *
+ * @param {FieldBaseProps & React.HTMLAttributes<HTMLDivElement>} props
+ * @returns {JSX.Element}
+ */
 function FieldTitle({
   className,
   ...props
@@ -125,6 +187,12 @@ function FieldTitle({
   );
 }
 
+/**
+ * Helper description text below a field.
+ *
+ * @param {FieldBaseProps & React.HTMLAttributes<HTMLParagraphElement>} props
+ * @returns {JSX.Element}
+ */
 function FieldDescription({
   className,
   ...props
@@ -142,6 +210,12 @@ function FieldDescription({
   );
 }
 
+/**
+ * Visual or labeled separator between fields.
+ *
+ * @param {FieldBaseProps & React.HTMLAttributes<HTMLDivElement>} props
+ * @returns {JSX.Element}
+ */
 function FieldSeparator({
   children,
   className,
@@ -168,6 +242,17 @@ function FieldSeparator({
   );
 }
 
+/**
+ * Displays validation errors for a field.
+ *
+ * @typedef {Object} FieldErrorProps
+ * @property {string} [className]
+ * @property {React.ReactNode} [children]
+ * @property {{ message?: string }[]} [errors]
+ *
+ * @param {FieldErrorProps & React.HTMLAttributes<HTMLDivElement>} props
+ * @returns {JSX.Element}
+ */
 function FieldError({
   className,
   children,

@@ -2,6 +2,16 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Styled text input with focus, disabled, and error states.
+ *
+ * @typedef {Object} InputProps
+ * @property {string} [className]
+ * @property {string} [type="text"]
+ *
+ * @param {InputProps & React.InputHTMLAttributes<HTMLInputElement>} props
+ * @returns {JSX.Element}
+ */
 function Input({
   className,
   type,

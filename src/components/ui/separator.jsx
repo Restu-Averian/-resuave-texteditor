@@ -5,6 +5,17 @@ import { Separator as SeparatorPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Visual divider line.
+ *
+ * @typedef {Object} SeparatorProps
+ * @property {string} [className]
+ * @property {"horizontal" | "vertical"} [orientation="horizontal"]
+ * @property {boolean} [decorative=true]
+ *
+ * @param {SeparatorProps & React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>} props
+ * @returns {JSX.Element}
+ */
 function Separator({
   className,
   orientation = "horizontal",

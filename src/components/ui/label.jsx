@@ -3,6 +3,16 @@ import { Label as LabelPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Styled label component built on Radix Label.
+ *
+ * @typedef {Object} LabelProps
+ * @property {string} [className]
+ * @property {React.ReactNode} [children]
+ *
+ * @param {LabelProps & React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>} props
+ * @returns {JSX.Element}
+ */
 function Label({
   className,
   ...props
