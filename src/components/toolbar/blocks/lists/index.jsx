@@ -56,7 +56,7 @@ const ToolbarLists_ = () => {
   }, [editorState?.alignValue]);
   return (
     <>
-      <ResponsiveWrapperToolbarItem className="flex justify-center items-center">
+      <ResponsiveWrapperToolbarItem className="flex justify-center items-center gap-2 mb-2">
         {checkShowToolbarItem("bulletList") && (
           <ToolbarItem
             disabled={isDisabled}
@@ -87,51 +87,49 @@ const ToolbarLists_ = () => {
         )}
       </ResponsiveWrapperToolbarItem>
 
-      <ResponsiveWrapperToolbarItem className="flex justify-center items-center">
-        {checkShowToolbarItem("align") && (
-          <ToggleGroup
-            type="single"
-            value={alignValue}
-            variant="outline"
-            onValueChange={(value) => {
-              editor?.chain()?.focus()?.toggleTextAlign(value)?.run();
-            }}
-            disabled={isDisabled}
-          >
-            {checkShowToolbarItem("alignLeft") && (
-              <Tooltip content={t("ALIGN_LEFT", "Align Left")}>
-                <ToggleGroupItem value="left">
-                  <AlignLeftIcon />
-                </ToggleGroupItem>
-              </Tooltip>
-            )}
+      {checkShowToolbarItem("align") && (
+        <ResponsiveWrapperToolbarItem className="flex justify-center items-center gap-2 flex-wrap">
+          {checkShowToolbarItem("alignLeft") && (
+            <ToolbarItem
+              disabled={isDisabled}
+              isActive={alignValue === "left"}
+              icon={<AlignLeftIcon />}
+              onClick={() => editor?.chain()?.focus()?.toggleTextAlign("left")?.run()}
+              label={t("ALIGN_LEFT", "Align Left")}
+            />
+          )}
 
-            {checkShowToolbarItem("alignCenter") && (
-              <Tooltip content={t("ALIGN_CENTER", "Align Center")}>
-                <ToggleGroupItem value="center">
-                  <AlignCenterIcon />
-                </ToggleGroupItem>
-              </Tooltip>
-            )}
+          {checkShowToolbarItem("alignCenter") && (
+            <ToolbarItem
+              disabled={isDisabled}
+              isActive={alignValue === "center"}
+              icon={<AlignCenterIcon />}
+              onClick={() => editor?.chain()?.focus()?.toggleTextAlign("center")?.run()}
+              label={t("ALIGN_CENTER", "Align Center")}
+            />
+          )}
 
-            {checkShowToolbarItem("alignRight") && (
-              <Tooltip content={t("ALIGN_RIGHT", "Align Right")}>
-                <ToggleGroupItem value="right">
-                  <AlignRightIcon />
-                </ToggleGroupItem>
-              </Tooltip>
-            )}
+          {checkShowToolbarItem("alignRight") && (
+            <ToolbarItem
+              disabled={isDisabled}
+              isActive={alignValue === "right"}
+              icon={<AlignRightIcon />}
+              onClick={() => editor?.chain()?.focus()?.toggleTextAlign("right")?.run()}
+              label={t("ALIGN_RIGHT", "Align Right")}
+            />
+          )}
 
-            {checkShowToolbarItem("alignJustify") && (
-              <Tooltip content={t("ALIGN_JUSTIFY", "Align Justify")}>
-                <ToggleGroupItem value="justify">
-                  <AlignJustifyIcon />
-                </ToggleGroupItem>
-              </Tooltip>
-            )}
-          </ToggleGroup>
-        )}
-      </ResponsiveWrapperToolbarItem>
+          {checkShowToolbarItem("alignJustify") && (
+            <ToolbarItem
+              disabled={isDisabled}
+              isActive={alignValue === "justify"}
+              icon={<AlignJustifyIcon />}
+              onClick={() => editor?.chain()?.focus()?.toggleTextAlign("justify")?.run()}
+              label={t("ALIGN_JUSTIFY", "Align Justify")}
+            />
+          )}
+        </ResponsiveWrapperToolbarItem>
+      )}
     </>
   );
 };

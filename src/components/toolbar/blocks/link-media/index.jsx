@@ -22,9 +22,12 @@ import {
 import ToolbarItem from "../../components/toolbar-item";
 import ResponsiveWrapperToolbarItem from "../../components/responsive-wrapper-toolbar-item";
 import useToolbarConfig from "@/hooks/useToolbarConfig";
+import useBreakpoint from "@/hooks/useBreakpoint";
+import { cn } from "@/lib/utils";
 
 const ToolbarLinkMedia_ = () => {
   const t = useTranslation();
+  const { xs } = useBreakpoint();
 
   const { editor, isSourceMode } = useCurrentEditor();
   const { checkDisableToolbarItem, checkShowToolbarItem } = useToolbarConfig();
@@ -111,10 +114,18 @@ const ToolbarLinkMedia_ = () => {
           }
         }}
       >
-        <Tooltip content={t("SET_LINK", "Set Link")}>
+        <Tooltip content={t("SET_LINK", "Set Link")} {...(xs && { open: false })}>
           <PopoverTrigger asChild>
-            <Button variant="ghost" disabled={isDisabled}>
-              <Link2 />
+            <Button
+              className={cn(
+                xs && "w-[72px] min-h-[72px] h-auto py-2 flex-col gap-1 rounded-2xl font-normal text-[11px] leading-[1.1] whitespace-normal text-center px-1.5",
+                !xs && "size-9"
+              )}
+              variant={xs ? "secondary" : "ghost"}
+              disabled={isDisabled}
+            >
+              <div className={cn(xs && "mb-0.5")}><Link2 /></div>
+              {xs && <span className="line-clamp-2 opacity-90">{t("SET_LINK", "Set Link")}</span>}
             </Button>
           </PopoverTrigger>
         </Tooltip>

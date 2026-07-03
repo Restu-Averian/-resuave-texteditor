@@ -25,6 +25,8 @@ const TexteditorContent_ = () => {
   const [keyboardOffset, setKeyboardOffset] = useState(0);
   const [showToolbarMobile, setShowToolbarMobile] = useState(false);
 
+  const showReadOnlyToolbar = readOnly && readOnlyToolbarMode === "disabled";
+
   useEffect(() => {
     const vv = window?.visualViewport;
     if (!vv) return;
@@ -46,7 +48,6 @@ const TexteditorContent_ = () => {
       vv.removeEventListener("scroll", update);
     };
   }, []);
-  const showReadOnlyToolbar = readOnly && readOnlyToolbarMode === "disabled";
 
   return (
     <>
@@ -89,8 +90,9 @@ const TexteditorContent_ = () => {
           }}
         >
           {!readOnly && (
-            <div className="w-full text-right pr-5 pb-5">
+            <div className="flex justify-end px-4 pb-4">
               <Button
+                className="rounded-xl bg-zinc-900 text-white hover:bg-zinc-800 shadow-md h-[42px] px-5"
                 onClick={() => {
                   readOnlyMobileEditor
                     .chain()
@@ -100,15 +102,17 @@ const TexteditorContent_ = () => {
                   setShowEditableEditorMobile(false);
                 }}
               >
-                <Edit2 /> Done
+                <Edit2 className="w-4 h-4 mr-2" /> Done
               </Button>
             </div>
           )}
 
-          <ToolbarMobile
-            showToolbarMobile={showToolbarMobile}
-            setShowToolbarMobile={setShowToolbarMobile}
-          />
+          <div className="px-4 pb-6 w-full">
+            <ToolbarMobile
+              showToolbarMobile={showToolbarMobile}
+              setShowToolbarMobile={setShowToolbarMobile}
+            />
+          </div>
         </div>
       )}
     </>
