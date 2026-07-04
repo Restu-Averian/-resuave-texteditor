@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import CodePreview from "../../components/CodePreview";
+import NavigationButtons from "../../components/NavigationButtons";
 
 export default function InstallationPage() {
   const [pkgManager, setPkgManager] = useState("npm");
@@ -82,34 +82,10 @@ export default function App() {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="grid grid-cols-2 gap-4 mt-4">
-              <a
-                href="#"
-                className="border border-gray-200 rounded-xl p-5 flex items-center gap-4 hover:border-gray-300 transition-colors bg-white group"
-              >
-                <ArrowLeft
-                  size={20}
-                  className="text-gray-400 group-hover:-translate-x-1 transition-transform"
-                />
-                <div className="flex flex-col">
-                  <span className="text-xs text-gray-500 mb-1">Previously</span>
-                  <span className="font-semibold text-gray-900">Overview</span>
-                </div>
-              </a>
-              <a
-                href="#"
-                className="border border-gray-200 rounded-xl p-5 flex items-center justify-between hover:border-gray-300 transition-colors bg-white group"
-              >
-                <div className="flex flex-col">
-                  <span className="text-xs text-gray-500 mb-1">Next up</span>
-                  <span className="font-semibold text-gray-900">Usage</span>
-                </div>
-                <ArrowRight
-                  size={20}
-                  className="text-gray-400 group-hover:translate-x-1 transition-transform"
-                />
-              </a>
-            </div>
+            <NavigationButtons
+              prev={{ path: "#", label: "Previously", title: "Overview" }}
+              next={{ path: "#", label: "Next up", title: "Usage" }}
+            />
           </div>
         </div>
   );

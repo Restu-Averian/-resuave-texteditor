@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CORE_PROPS, OPTIONAL_PROPS } from "@/data/props-data";
 import CodePreview from "@/components/CodePreview";
+import NavigationButtons from "@/components/NavigationButtons";
 import {
   Table,
   TableBody,
@@ -185,34 +185,10 @@ export default function App() {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="grid grid-cols-2 gap-4 mt-4">
-          <Link
-            to="/"
-            className="border border-gray-200 rounded-xl p-5 flex items-center gap-4 hover:border-gray-300 transition-colors bg-white group"
-          >
-            <ArrowLeft
-              size={20}
-              className="text-gray-400 group-hover:-translate-x-1 transition-transform"
-            />
-            <div className="flex flex-col">
-              <span className="text-xs text-gray-500 mb-1">Previously</span>
-              <span className="font-semibold text-gray-900">Features</span>
-            </div>
-          </Link>
-          <Link
-            to="#"
-            className="border border-gray-200 rounded-xl p-5 flex items-center justify-between hover:border-gray-300 transition-colors bg-white group"
-          >
-            <div className="flex flex-col">
-              <span className="text-xs text-gray-500 mb-1">Next up</span>
-              <span className="font-semibold text-gray-900">Mobile Mode</span>
-            </div>
-            <ArrowRight
-              size={20}
-              className="text-gray-400 group-hover:translate-x-1 transition-transform"
-            />
-          </Link>
-        </div>
+        <NavigationButtons
+          prev={{ path: "/", label: "Previously", title: "Features" }}
+          next={{ path: "#", label: "Next up", title: "Mobile Mode" }}
+        />
       </div>
     </div>
   );
