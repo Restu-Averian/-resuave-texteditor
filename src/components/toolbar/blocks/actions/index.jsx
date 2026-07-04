@@ -17,6 +17,9 @@ const ToolbarActions_ = () => {
   const editorState = useEditorState({
     editor,
     selector(ctx) {
+      console.log("c", ctx?.editor);
+      if (!ctx?.editor) return { isUndo: false, isRedo: false };
+
       return {
         isUndo: ctx.editor.can().chain().focus().undo().run(),
         isRedo: ctx.editor.can().chain().focus().redo().run(),

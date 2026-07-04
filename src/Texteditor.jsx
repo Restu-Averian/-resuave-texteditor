@@ -38,9 +38,9 @@ function Texteditor({
 
   const defaultClassEditor = useMemo(() => {
     if (xs) {
-      return "p-2.5 rounded-2xl w-full mx-auto h-full outline-1 ";
+      return "p-4 w-full h-full outline-none focus:outline-none";
     }
-    return "outline-1 p-2.5 rounded-2xl w-2xl mx-auto";
+    return "p-4 w-full outline-none focus:outline-none min-h-[200px]";
   }, [xs]);
 
   const extensions = useMemo(() => getExtensions(placeholder), [placeholder]);
@@ -91,7 +91,9 @@ function Texteditor({
   useEffect(() => {
     editor?.setEditable(!readOnly);
     if (readOnly) {
-      setSourceMode(false);
+      queueMicrotask(() => {
+        setSourceMode(false);
+      });
     }
   }, [editor, readOnly]);
 
@@ -140,7 +142,12 @@ function Texteditor({
       contentClassName={contentClassName}
       readOnlyToolbarMode={readOnlyToolbarMode}
     >
-      <div className={className}>
+      <div
+        className={cn(
+          "bg-card text-card-foreground border shadow-sm rounded-xl overflow-hidden w-full max-w-4xl mx-auto",
+          className,
+        )}
+      >
         <EditorContext.Provider value={providerValue}>
           <TooltipProvider>
             {xs && !readOnly ? (

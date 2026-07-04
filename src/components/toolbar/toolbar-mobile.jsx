@@ -56,24 +56,30 @@ const ToolbarMobile_ = ({ showToolbarMobile, setShowToolbarMobile }) => {
 
   return (
     <Tabs
-      className="w-full"
+      className="w-full flex flex-col-reverse gap-3 relative"
       {...(showToolbarMobile === false && {
         value: "",
       })}
-      onValueChange={() => {
+      onValueChange={(val) => {
+        if (!val) {
+          setShowToolbarMobile(false);
+          return;
+        }
         setShowToolbarMobile(true);
-
         if (checkDisableToolbarItem) return;
-
         setTimeout(() => {
           editor?.chain().focus().run();
         }, 0);
       }}
     >
-      <TabsList className="w-full">
+      <TabsList className="w-full h-[52px] rounded-2xl bg-zinc-100 p-1.5 shadow-sm">
         {tabList?.map((tab) => {
           return (
-            <TabsTrigger value={tab?.value} key={tab?.value}>
+            <TabsTrigger
+              value={tab?.value}
+              key={tab?.value}
+              className="rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-sm h-full"
+            >
               {tab?.icon}
             </TabsTrigger>
           );
@@ -82,7 +88,12 @@ const ToolbarMobile_ = ({ showToolbarMobile, setShowToolbarMobile }) => {
 
       {tabList?.map((tab) => {
         return (
-          <TabsContent value={tab?.value} key={tab?.value} className="bg-white">
+          <TabsContent
+            value={tab?.value}
+            key={tab?.value}
+            className="bg-white p-4 rounded-[32px] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] border border-slate-50 mt-0 data-[state=inactive]:hidden"
+          >
+            <div className="w-10 h-1.5 bg-slate-200 rounded-full mx-auto mb-5" />
             {tab?.content}
           </TabsContent>
         );

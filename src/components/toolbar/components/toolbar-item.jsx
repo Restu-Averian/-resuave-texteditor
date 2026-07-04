@@ -48,12 +48,22 @@ const ToolbarItem_ = ({
       })}
     >
       <Button
-        className={cn(xs && isPreview === false && "size-16")}
+        className={cn(
+          xs &&
+            isPreview === false &&
+            "w-[72px] min-h-[72px] h-auto py-2 flex-col gap-1 rounded-2xl font-normal text-[11px] leading-[1.1] whitespace-normal text-center px-1.5",
+          !xs && "size-9",
+        )}
         variant={variantBtn}
         disabled={disabled || checkDisableToolbarItem}
         onClick={onClick}
       >
-        {icon}
+        <div className={cn(xs && isPreview === false && "mb-0.5")}>
+          {icon}
+        </div>
+        {xs && isPreview === false && label && (
+          <span className="line-clamp-2 opacity-90">{label}</span>
+        )}
       </Button>
     </Tooltip>
   );
