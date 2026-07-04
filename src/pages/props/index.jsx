@@ -1,7 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Copy, ArrowLeft, ArrowRight } from "lucide-react";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CORE_PROPS, OPTIONAL_PROPS } from "@/data/props-data";
+import CodePreview from "@/components/CodePreview";
 import {
   Table,
   TableBody,
@@ -12,6 +13,20 @@ import {
 } from "@/components/ui/table";
 
 export default function PropsPage() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      setTimeout(() => {
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    }
+  }, [hash]);
+
   return (
     <div className="flex-1 overflow-y-auto p-12">
       <div className="max-w-4xl mx-auto flex flex-col gap-10">
@@ -61,7 +76,11 @@ export default function PropsPage() {
                 </TableHeader>
                 <TableBody className="divide-y divide-gray-50">
                   {CORE_PROPS.map((prop, idx) => (
-                    <TableRow key={idx}>
+                    <TableRow
+                      key={idx}
+                      id={prop.prop}
+                      className="scroll-mt-[50px]"
+                    >
                       <TableCell className="px-4 py-3 font-mono text-xs text-gray-800">
                         {prop.prop}
                       </TableCell>
@@ -106,7 +125,11 @@ export default function PropsPage() {
                 </TableHeader>
                 <TableBody className="divide-y divide-gray-50">
                   {OPTIONAL_PROPS.map((prop, idx) => (
-                    <TableRow key={idx}>
+                    <TableRow
+                      key={idx}
+                      id={prop.prop}
+                      className="scroll-mt-[50px]"
+                    >
                       <TableCell className="px-4 py-3 font-mono text-xs text-gray-800">
                         {prop.prop}
                       </TableCell>
@@ -131,64 +154,20 @@ export default function PropsPage() {
             <h3 className="font-semibold text-gray-900 text-sm">
               3. Controlled example
             </h3>
-            <div className="bg-[#111111] rounded-lg p-4 overflow-x-auto relative group">
-              <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
-                <Copy size={16} />
-              </button>
-              <pre className="text-sm font-mono text-gray-300 leading-relaxed">
-                <span className="text-gray-500 select-none mr-4">1</span>
-                <span className="text-pink-400">import</span> {"{"}{" "}
-                <span className="text-blue-300">useState</span> {"}"}{" "}
-                <span className="text-pink-400">from</span>{" "}
-                <span className="text-green-400">'react'</span>
-                <br />
-                <span className="text-gray-500 select-none mr-4">2</span>
-                <span className="text-pink-400">import</span> {"{"}{" "}
-                <span className="text-blue-300">ResuaveEditor</span> {"}"}{" "}
-                <span className="text-pink-400">from</span>{" "}
-                <span className="text-green-400">'@resuave/tiptap-editor'</span>
-                <br />
-                <span className="text-gray-500 select-none mr-4">3</span>
-                <br />
-                <span className="text-gray-500 select-none mr-4">4</span>
-                <span className="text-pink-400">
-                  export default function
-                </span>{" "}
-                <span className="text-blue-400">App</span>() {"{"}
-                <br />
-                <span className="text-gray-500 select-none mr-4">5</span>
-                {"  "}
-                <span className="text-pink-400">const</span> [{" "}
-                <span className="text-blue-300">value</span>,{" "}
-                <span className="text-blue-300">setValue</span> ] ={" "}
-                <span className="text-blue-400">useState</span>(
-                <span className="text-green-400">
-                  '&lt;p&gt;Hello, Resuave!&lt;/p&gt;'
-                </span>
-                )
-                <br />
-                <span className="text-gray-500 select-none mr-4">6</span>
-                <br />
-                <span className="text-gray-500 select-none mr-4">7</span>
-                {"  "}
-                <span className="text-pink-400">return</span> (
-                <br />
-                <span className="text-gray-500 select-none mr-4">8</span>
-                {"    "}
-                <span className="text-blue-400">&lt;ResuaveEditor</span>{" "}
-                <span className="text-purple-300">value</span>={"{"}
-                <span className="text-orange-300">value</span>
-                {"}"} <span className="text-purple-300">onChange</span>={"{"}
-                <span className="text-blue-300">setValue</span>
-                {"}"} <span className="text-blue-400">/&gt;</span>
-                <br />
-                <span className="text-gray-500 select-none mr-4">9</span>
-                {"  "})
-                <br />
-                <span className="text-gray-500 select-none mr-4">10</span>
-                {"}"}
-              </pre>
-            </div>
+            <CodePreview
+              code={`import { useState } from 'react'
+import { ResuaveEditor } from '@resuave/tiptap-editor'
+
+export default function App() {
+  const [ value, setValue ] = useState('<p>Hello, Resuave!</p>')
+
+  return (
+    <ResuaveEditor value={value} onChange={setValue} />
+  )
+}`}
+              language="jsx"
+              theme="dark"
+            />
           </div>
 
           {/* Step 4: Notes */}

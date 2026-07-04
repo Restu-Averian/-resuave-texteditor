@@ -55,59 +55,7 @@ const SEARCH_DATA = [
       },
     ],
   },
-  {
-    category: "LANDING SECTIONS / HIGHLIGHTS",
-    items: [
-      {
-        id: "text-formatting",
-        title: "Text Formatting",
-        description: "Bold, italic, underline, strike, code, and more.",
-        icon: Bold,
-        type: "page",
-        url: "/#text-formatting",
-      },
-      {
-        id: "lists",
-        title: "Lists",
-        description: "Bulleted, numbered, and checklist support.",
-        icon: ListOrdered,
-        type: "page",
-        url: "/#lists",
-      },
-      {
-        id: "alignment",
-        title: "Alignment",
-        description: "Left, center, right, and justify.",
-        icon: AlignLeft,
-        type: "page",
-        url: "/#alignment",
-      },
-      {
-        id: "link-support",
-        title: "Link Support",
-        description: "Add and edit links with ease.",
-        icon: LinkIcon,
-        type: "page",
-        url: "/#link-support",
-      },
-      {
-        id: "mobile-mode",
-        title: "Mobile Mode",
-        description: "Optimized editing experience on mobile.",
-        icon: Smartphone,
-        type: "page",
-        url: "/#mobile-mode",
-      },
-      {
-        id: "easy-setup",
-        title: "Easy Setup",
-        description: "Drop in and start building instantly.",
-        icon: Zap,
-        type: "page",
-        url: "/#easy-setup",
-      },
-    ],
-  },
+
   {
     category: "PROPS ENTRIES",
     items: [
@@ -132,14 +80,6 @@ const SEARCH_DATA = [
   {
     category: "OTHER",
     items: [
-      {
-        id: "get-started",
-        title: "Get Started",
-        description: "Jump to the quick start guide",
-        icon: Rocket,
-        type: "link",
-        url: "/installation",
-      },
       {
         id: "github",
         title: "View on GitHub",
@@ -365,34 +305,6 @@ export default function SearchCommand() {
           {flatItems.length === 0 && (
             <div className="py-12 text-center text-sm text-gray-500">
               No results found for "{query}".
-            </div>
-          )}
-
-          {!query && (
-            <div className="mb-2 mt-4 border-t border-gray-100 pt-4">
-              <div className="px-3 mb-2 text-[10px] font-bold tracking-wider text-gray-400 uppercase">
-                RECENT
-              </div>
-              <div className="px-3 flex flex-wrap gap-2">
-                <div
-                  onClick={() => handleSelect(SEARCH_DATA[0].items[2])}
-                  className="flex items-center gap-1.5 bg-white border border-gray-200 px-2.5 py-1 rounded-md text-[11px] text-gray-600 font-medium cursor-pointer hover:bg-gray-50 transition-colors"
-                >
-                  Props
-                </div>
-                <div
-                  onClick={() => handleSelect(SEARCH_DATA[0].items[1])}
-                  className="flex items-center gap-1.5 bg-white border border-gray-200 px-2.5 py-1 rounded-md text-[11px] text-gray-600 font-medium cursor-pointer hover:bg-gray-50 transition-colors"
-                >
-                  Installation
-                </div>
-                <div
-                  onClick={() => handleSelect(SEARCH_DATA[1].items[0])}
-                  className="flex items-center gap-1.5 bg-white border border-gray-200 px-2.5 py-1 rounded-md text-[11px] text-gray-600 font-medium cursor-pointer hover:bg-gray-50 transition-colors"
-                >
-                  Text Formatting
-                </div>
-              </div>
             </div>
           )}
         </div>
