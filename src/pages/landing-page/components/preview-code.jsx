@@ -18,13 +18,13 @@ export default function PreviewCode() {
           <TabsList variant="line" className="h-auto p-0 gap-6">
             <TabsTrigger
               value="installation"
-              className="text-gray-400 hover:text-gray-200 data-[state=active]:text-white text-sm font-medium pb-4 border-b-2 border-transparent data-[state=active]:border-white transition-colors rounded-none px-0 !bg-transparent !shadow-none outline-none after:hidden"
+              className="text-gray-400 hover:text-gray-200 data-[state=active]:text-white text-sm font-medium pb-4 border-b-2 border-transparent data-[state=active]:border-white transition-colors rounded-none px-0 bg-transparent! shadow-none! outline-none after:hidden"
             >
               Installation
             </TabsTrigger>
             <TabsTrigger
               value="quick-start"
-              className="text-gray-400 hover:text-gray-200 data-[state=active]:text-white text-sm font-medium pb-4 border-b-2 border-transparent data-[state=active]:border-white transition-colors rounded-none px-0 !bg-transparent !shadow-none outline-none after:hidden"
+              className="text-gray-400 hover:text-gray-200 data-[state=active]:text-white text-sm font-medium pb-4 border-b-2 border-transparent data-[state=active]:border-white transition-colors rounded-none px-0 bg-transparent! shadow-none! outline-none after:hidden"
             >
               Quick Start
             </TabsTrigger>
