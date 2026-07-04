@@ -2,6 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Copy, ArrowLeft, ArrowRight } from "lucide-react";
 import { CORE_PROPS, OPTIONAL_PROPS } from "@/data/props-data";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default function PropsPage() {
   return (
@@ -34,42 +42,42 @@ export default function PropsPage() {
               1. Core props
             </h3>
             <div className="border border-gray-100 rounded-lg overflow-hidden">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-gray-50 border-b border-gray-100">
-                  <tr>
-                    <th className="px-4 py-3 font-semibold text-gray-900">
+              <Table className="w-full text-left text-sm">
+                <TableHeader className="bg-gray-50 border-b border-gray-100">
+                  <TableRow>
+                    <TableHead className="px-4 py-3 font-semibold text-gray-900">
                       Prop
-                    </th>
-                    <th className="px-4 py-3 font-semibold text-gray-900">
+                    </TableHead>
+                    <TableHead className="px-4 py-3 font-semibold text-gray-900">
                       Type
-                    </th>
-                    <th className="px-4 py-3 font-semibold text-gray-900">
+                    </TableHead>
+                    <TableHead className="px-4 py-3 font-semibold text-gray-900">
                       Default
-                    </th>
-                    <th className="px-4 py-3 font-semibold text-gray-900">
+                    </TableHead>
+                    <TableHead className="px-4 py-3 font-semibold text-gray-900">
                       Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-50">
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="divide-y divide-gray-50">
                   {CORE_PROPS.map((prop, idx) => (
-                    <tr key={idx}>
-                      <td className="px-4 py-3 font-mono text-xs text-gray-800">
+                    <TableRow key={idx}>
+                      <TableCell className="px-4 py-3 font-mono text-xs text-gray-800">
                         {prop.prop}
-                      </td>
-                      <td className="px-4 py-3 text-gray-600 font-mono text-[11px] whitespace-nowrap">
+                      </TableCell>
+                      <TableCell className="px-4 py-3 text-gray-600 font-mono text-[11px] whitespace-nowrap">
                         {prop.type}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-xs text-gray-500">
+                      </TableCell>
+                      <TableCell className="px-4 py-3 font-mono text-xs text-gray-500">
                         {prop.default}
-                      </td>
-                      <td className="px-4 py-3 text-gray-600">
+                      </TableCell>
+                      <TableCell className="px-4 py-3 text-gray-600">
                         {prop.description}
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           </div>
 
@@ -79,42 +87,42 @@ export default function PropsPage() {
               2. Optional props
             </h3>
             <div className="border border-gray-100 rounded-lg overflow-hidden">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-gray-50 border-b border-gray-100">
-                  <tr>
-                    <th className="px-4 py-3 font-semibold text-gray-900">
+              <Table className="w-full text-left text-sm">
+                <TableHeader className="bg-gray-50 border-b border-gray-100">
+                  <TableRow>
+                    <TableHead className="px-4 py-3 font-semibold text-gray-900">
                       Prop
-                    </th>
-                    <th className="px-4 py-3 font-semibold text-gray-900">
+                    </TableHead>
+                    <TableHead className="px-4 py-3 font-semibold text-gray-900">
                       Type
-                    </th>
-                    <th className="px-4 py-3 font-semibold text-gray-900">
+                    </TableHead>
+                    <TableHead className="px-4 py-3 font-semibold text-gray-900">
                       Default
-                    </th>
-                    <th className="px-4 py-3 font-semibold text-gray-900">
+                    </TableHead>
+                    <TableHead className="px-4 py-3 font-semibold text-gray-900">
                       Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-50">
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="divide-y divide-gray-50">
                   {OPTIONAL_PROPS.map((prop, idx) => (
-                    <tr key={idx}>
-                      <td className="px-4 py-3 font-mono text-xs text-gray-800">
+                    <TableRow key={idx}>
+                      <TableCell className="px-4 py-3 font-mono text-xs text-gray-800">
                         {prop.prop}
-                      </td>
-                      <td className="px-4 py-3 text-gray-600 font-mono text-[11px] whitespace-nowrap">
+                      </TableCell>
+                      <TableCell className="px-4 py-3 text-gray-600 font-mono text-[11px] whitespace-nowrap">
                         {prop.type}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-xs text-gray-500">
+                      </TableCell>
+                      <TableCell className="px-4 py-3 font-mono text-xs text-gray-500">
                         {prop.default}
-                      </td>
-                      <td className="px-4 py-3 text-gray-600">
+                      </TableCell>
+                      <TableCell className="px-4 py-3 text-gray-600">
                         {prop.description}
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           </div>
 

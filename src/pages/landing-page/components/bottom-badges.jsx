@@ -23,11 +23,7 @@ export default function BottomBadges() {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        <Accessibility
-          size={24}
-          strokeWidth={1.5}
-          className="text-gray-800"
-        />
+        <Accessibility size={24} strokeWidth={1.5} className="text-gray-800" />
         <div className="flex flex-col">
           <span className="text-[15px] font-semibold text-gray-900">
             Accessible
@@ -41,9 +37,7 @@ export default function BottomBadges() {
           <span className="text-[15px] font-semibold text-gray-900">
             Secure
           </span>
-          <span className="text-sm text-gray-500">
-            No unnecessary bloat
-          </span>
+          <span className="text-sm text-gray-500">No unnecessary bloat</span>
         </div>
       </div>
     </section>
