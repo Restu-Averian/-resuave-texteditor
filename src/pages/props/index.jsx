@@ -186,8 +186,11 @@ export default function App() {
 
         {/* Navigation Buttons */}
         <NavigationButtons
-          prev={{ path: "/", label: "Previously", title: "Features" }}
-          next={{ path: "#", label: "Next up", title: "Mobile Mode" }}
+          prev={{
+            path: "/installation",
+            label: "Previously",
+            title: "Installation",
+          }}
         />
       </div>
     </div>
