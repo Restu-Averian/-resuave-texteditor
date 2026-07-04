@@ -168,7 +168,7 @@ export default function PropsPage() {
                 <span className="text-gray-500 select-none mr-4">8</span>
                 {"    "}
                 <span className="text-blue-400">&lt;ResuaveEditor</span>{" "}
-                <span className="text-purple-300">content</span>={"{"}
+                <span className="text-purple-300">value</span>={"{"}
                 <span className="text-orange-300">value</span>
                 {"}"} <span className="text-purple-300">onChange</span>={"{"}
                 <span className="text-blue-300">setValue</span>
