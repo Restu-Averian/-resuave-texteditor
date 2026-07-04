@@ -12,8 +12,8 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
         <Route element={<Layout />}>
-          <Route path="/" element={<LandingPage />} />
           <Route path="/installation" element={<InstallationPage />} />
           <Route path="/props" element={<PropsPage />} />
           <Route path="*" element={<NotFoundPage />} />

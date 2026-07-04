@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, Download, List as ListIcon } from "lucide-react";
+import { Download, List as ListIcon } from "lucide-react";
 
 function SidebarItem({ icon: Icon, label, to, active }) {
   return (
@@ -24,20 +24,14 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 border-r border-gray-200 bg-white flex flex-col h-screen sticky top-0">
-      <div className="p-6 flex items-center gap-2">
-        <div className="w-8 h-8 border border-gray-300 rounded flex items-center justify-center font-semibold text-lg">
+      <Link to="/" className="p-6 flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <div className="w-8 h-8 bg-[#111111] text-white rounded flex items-center justify-center font-bold text-lg">
           R
         </div>
-        <span className="font-semibold text-lg">Resuave Editor</span>
-      </div>
+        <span className="font-semibold text-lg text-gray-900">Resuave Editor</span>
+      </Link>
 
       <nav className="flex-1 px-4 flex flex-col gap-1">
-        <SidebarItem
-          icon={Home}
-          label="Overview"
-          to="/"
-          active={path === "/"}
-        />
         <SidebarItem
           icon={Download}
           label="Installation"

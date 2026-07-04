@@ -30,14 +30,14 @@ const ToolbarLists_ = () => {
     editor,
     selector: (ctx) => {
       return {
-        isBulletList: ctx?.editor.isActive("bulletList"),
-        isOrderedList: ctx?.editor.isActive("orderedList"),
-        isTaskList: ctx?.editor.isActive("taskList"),
+        isBulletList: ctx?.editor?.isActive("bulletList"),
+        isOrderedList: ctx?.editor?.isActive("orderedList"),
+        isTaskList: ctx?.editor?.isActive("taskList"),
         alignValue: {
-          left: ctx.editor.isActive({ textAlign: "left" }) ?? false,
-          right: ctx.editor.isActive({ textAlign: "right" }) ?? false,
-          center: ctx.editor.isActive({ textAlign: "center" }) ?? false,
-          justify: ctx.editor.isActive({ textAlign: "justify" }) ?? false,
+          left: ctx?.editor?.isActive({ textAlign: "left" }) ?? false,
+          right: ctx?.editor?.isActive({ textAlign: "right" }) ?? false,
+          center: ctx?.editor?.isActive({ textAlign: "center" }) ?? false,
+          justify: ctx?.editor?.isActive({ textAlign: "justify" }) ?? false,
         },
       };
     },
