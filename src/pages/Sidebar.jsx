@@ -1,13 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  Home,
-  Download,
-  List as ListIcon,
-  Computer,
-  Package,
-  ExternalLink,
-} from "lucide-react";
+import { Home, Download, List as ListIcon } from "lucide-react";
 
 function SidebarItem({ icon: Icon, label, to, active }) {
   return (

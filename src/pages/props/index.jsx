@@ -1,21 +1,10 @@
 import React from "react";
-import Sidebar from "../Sidebar";
-import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
 import { Copy, ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function PropsPage() {
   return (
-    <div className="min-h-screen bg-[#fafafa] flex font-sans text-gray-900">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0">
-        <Navbar />
-
-        {/* Content Body */}
-        <div className="flex-1 overflow-y-auto p-12">
+    <div className="flex-1 overflow-y-auto p-12">
           <div className="max-w-4xl mx-auto flex flex-col gap-10">
             {/* Header Area */}
             <div className="flex flex-col gap-4">
@@ -317,7 +306,5 @@ export default function PropsPage() {
             </div>
           </div>
         </div>
-      </main>
-    </div>
   );
 }
