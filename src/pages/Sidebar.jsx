@@ -24,11 +24,16 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 border-r border-gray-200 bg-white flex flex-col h-screen sticky top-0">
-      <Link to="/" className="p-6 flex items-center gap-2 hover:opacity-80 transition-opacity">
+      <Link
+        to="/"
+        className="p-6 flex items-center gap-2 hover:opacity-80 transition-opacity"
+      >
         <div className="w-8 h-8 bg-[#111111] text-white rounded flex items-center justify-center font-bold text-lg">
           R
         </div>
-        <span className="font-semibold text-lg text-gray-900">Resuave Editor</span>
+        <span className="font-semibold text-lg text-gray-900">
+          Resuave Editor
+        </span>
       </Link>
 
       <nav className="flex-1 px-4 flex flex-col gap-1">

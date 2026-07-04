@@ -1,5 +1,6 @@
 import React from "react";
-import { Search, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import SearchCommand from "../components/SearchCommand";
 
 export default function Navbar() {
   return (
@@ -18,17 +19,7 @@ export default function Navbar() {
       <a href="#" className="flex items-center gap-1 hover:text-gray-900">
         NPM <ExternalLink size={14} />
       </a>
-      <div className="relative flex items-center">
-        <Search size={14} className="absolute left-3 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search"
-          className="pl-9 pr-12 py-1.5 bg-gray-100 border border-transparent rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-gray-200 focus:bg-white w-64 transition-all"
-        />
-        <div className="absolute right-2 border border-gray-200 rounded px-1.5 py-0.5 text-[10px] text-gray-400 font-mono bg-white">
-          ⌘K
-        </div>
-      </div>
+      <SearchCommand />
     </header>
   );
 }
