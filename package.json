@@ -1,6 +1,6 @@
 {
   "name": "@resuave/texteditor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A reusable rich text editor component built with Tiptap for React applications.",
   "homepage": "https://resuave-texteditor.pages.dev/",
   "repository": {
