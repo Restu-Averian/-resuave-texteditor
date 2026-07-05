@@ -2,6 +2,18 @@
   "name": "@resuave/texteditor",
   "version": "0.1.0",
   "description": "A reusable rich text editor component built with Tiptap for React applications.",
+  "homepage": "https://github.com/Restu-Averian/-resuave-texteditor#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Restu-Averian/-resuave-texteditor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Restu-Averian/-resuave-texteditor/issues"
+  },
+  "author": {
+    "name": "Restu-Averian",
+    "url": "https://github.com/Restu-Averian"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -88,6 +100,5 @@
     "wysiwyg",
     "editor"
   ],
-  "author": "Restu Ave",
   "license": "MIT"
 }
