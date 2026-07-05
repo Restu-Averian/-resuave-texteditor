@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { CORE_PROPS, OPTIONAL_PROPS } from "@/data/props-data";
 import CodePreview from "@/components/CodePreview";
 import NavigationButtons from "@/components/NavigationButtons";
@@ -156,13 +156,13 @@ export default function PropsPage() {
             </h3>
             <CodePreview
               code={`import { useState } from 'react'
-import { ResuaveEditor } from '@resuave/tiptap-editor'
+import { ResuAveTextEditor } from '@resuave/texteditor'
 
 export default function App() {
   const [ value, setValue ] = useState('<p>Hello, Resuave!</p>')
 
   return (
-    <ResuaveEditor value={value} onChange={setValue} />
+    <ResuAveTextEditor value={value} onChange={setValue} />
   )
 }`}
               language="jsx"

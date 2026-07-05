@@ -52,7 +52,7 @@ export default function InstallationPage() {
               1. Install package
             </h3>
             <CodePreview
-              code={`${pkgManager} ${pkgManager === "yarn" ? "add" : "install"} @resuave/tiptap-editor`}
+              code={`${pkgManager} ${pkgManager === "yarn" ? "add" : "install"} @resuave/texteditor`}
             />
           </div>
 
@@ -73,12 +73,12 @@ export default function InstallationPage() {
             </h3>
             <CodePreview
               language="jsx"
-              code={`import { ResuaveEditor } from '@resuave/tiptap-editor'
-import '@resuave/tiptap-editor/style.css'
+              code={`import { ResuAveTextEditor } from '@resuave/texteditor'
+import '@resuave/texteditor/style.css'
 
 export default function App() {
   return (
-    <ResuaveEditor content="Hello, Resuave!" onChange={(c) => console.log(c)} />
+    <ResuAveTextEditor content="Hello, Resuave!" onChange={(c) => console.log(c)} />
   )
 }`}
             />

@@ -5,16 +5,19 @@ A reusable rich text editor component built with Tiptap for React applications.
 ## Installation
 
 npm:
+
 ```bash
 npm install @resuave/texteditor
 ```
 
 pnpm:
+
 ```bash
 pnpm add @resuave/texteditor
 ```
 
 yarn:
+
 ```bash
 yarn add @resuave/texteditor
 ```
@@ -28,12 +31,12 @@ npm install react react-dom @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap
 ## Usage
 
 ```jsx
-import { ResuaveEditor } from "@resuave/texteditor";
+import { ResuAveTextEditor } from "@resuave/texteditor";
 import "@resuave/texteditor/style.css";
 
 export default function App() {
   return (
-    <ResuaveEditor
+    <ResuAveTextEditor
       content="<p>Hello, Resuave!</p>"
       onChange={(html) => console.log(html)}
     />
