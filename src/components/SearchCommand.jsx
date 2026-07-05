@@ -14,22 +14,16 @@ import {
   DrawerDescription as DrawerDescUI,
 } from "@/components/ui/drawer";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
   Search,
   X,
   Home,
   Download,
   List,
-  Bold,
-  ListOrdered,
-  AlignLeft,
-  Link as LinkIcon,
-  Zap,
-  Rocket,
   GitBranch as Github,
   Package,
   ArrowUpRight,
-  Smartphone,
 } from "lucide-react";
 import { Fzf } from "fzf";
 import { CORE_PROPS, OPTIONAL_PROPS } from "@/data/props-data";
@@ -108,22 +102,6 @@ const SEARCH_DATA = [
     ],
   },
 ];
-
-export function useMediaQuery(query) {
-  const [value, setValue] = useState(false);
-
-  useEffect(() => {
-    function onChange(event) {
-      setValue(event.matches);
-    }
-    const result = matchMedia(query);
-    result.addEventListener("change", onChange);
-    setValue(result.matches);
-    return () => result.removeEventListener("change", onChange);
-  }, [query]);
-
-  return value;
-}
 
 export default function SearchCommand() {
   const [open, setOpen] = useState(false);
@@ -368,7 +346,9 @@ export default function SearchCommand() {
         >
           <div className="sr-only">
             <DialogTitle>Search Command</DialogTitle>
-            <DialogDescription>Search pages, props, and links</DialogDescription>
+            <DialogDescription>
+              Search pages, props, and links
+            </DialogDescription>
           </div>
           {innerContent}
         </DialogContent>
