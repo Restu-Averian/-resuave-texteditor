@@ -1,11 +1,9 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Drawer,
   DrawerContent,
@@ -35,7 +33,7 @@ const SEARCH_DATA = [
       {
         id: "overview",
         title: "Overview",
-        description: "Introduction to Resuave Editor and key highlights",
+        description: "Introduction to ResuAve TextEditor and key highlights",
         icon: Home,
         type: "page",
         url: "/",
@@ -43,7 +41,7 @@ const SEARCH_DATA = [
       {
         id: "installation",
         title: "Installation",
-        description: "Install Resuave Editor in your React app",
+        description: "Install ResuAve TextEditor in your React app",
         icon: Download,
         type: "page",
         url: "/installation",
@@ -51,7 +49,7 @@ const SEARCH_DATA = [
       {
         id: "props",
         title: "Props",
-        description: "Learn the available props for Resuave Editor",
+        description: "Learn the available props for ResuAve TextEditor",
         icon: List,
         type: "page",
         url: "/props",
@@ -97,7 +95,7 @@ const SEARCH_DATA = [
         description: "View on npmjs.com",
         icon: Package,
         type: "link",
-        url: "https://www.npmjs.com",
+        url: "https://www.npmjs.com/package/@resuave/texteditor",
       },
     ],
   },
@@ -265,7 +263,7 @@ export default function SearchCommand() {
                     onMouseEnter={() => setSelectedIndex(globalIndex)}
                     data-selected={isSelected}
                     className={`flex items-center justify-between mx-2 px-4 py-3.5 rounded-xl cursor-pointer transition-colors ${
-                      isSelected ? "bg-gray-50/80" : "hover:bg-gray-50/50"
+                      isSelected ? "bg-gray-100" : "hover:bg-gray-50/50"
                     }`}
                   >
                     <div className="flex items-center gap-4 overflow-hidden">
@@ -338,21 +336,16 @@ export default function SearchCommand() {
 
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent
-          showCloseButton={false}
-          className="w-full max-w-[640px] p-0 gap-0 rounded-3xl overflow-hidden shadow-2xl bg-white border-none outline-none data-open:zoom-in-95 data-closed:zoom-out-95"
+      <DropdownMenu open={open} onOpenChange={setOpen}>
+        <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
+        <DropdownMenuContent
+          align="end"
+          sideOffset={8}
+          className="w-full max-w-[640px] sm:w-[640px] p-0 gap-0 rounded-3xl overflow-hidden shadow-2xl bg-white border-none outline-none"
         >
-          <div className="sr-only">
-            <DialogTitle>Search Command</DialogTitle>
-            <DialogDescription>
-              Search pages, props, and links
-            </DialogDescription>
-          </div>
           {innerContent}
-        </DialogContent>
-      </Dialog>
+        </DropdownMenuContent>
+      </DropdownMenu>
     );
   }
 

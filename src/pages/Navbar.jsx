@@ -48,9 +48,13 @@ export default function Navbar() {
           to="/"
           className="flex items-center gap-3 hover:opacity-80 transition-opacity"
         >
-          <img src="/icon.webp" alt="Resuave Editor Logo" className="w-8 h-8 rounded" />
+          <img
+            src="/icon.webp"
+            alt="ResuAve TextEditor Logo"
+            className="w-8 h-8 rounded"
+          />
           <span className="font-semibold text-[17px] text-gray-900 tracking-tight hidden sm:block">
-            Resuave Editor
+            ResuAve TextEditor
           </span>
         </Link>
       </div>

@@ -37,7 +37,7 @@ export default function Sidebar({ className = "", isMobile = false }) {
               R
             </div>
             <span className="font-semibold text-[17px] text-gray-900 tracking-tight">
-              Resuave Editor
+              ResuAve TextEditor
             </span>
           </Link>
         </div>

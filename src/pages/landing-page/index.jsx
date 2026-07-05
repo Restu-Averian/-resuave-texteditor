@@ -41,11 +41,11 @@ export default function LandingPage() {
           >
             <img
               src="/icon.webp"
-              alt="Resuave Editor Logo"
+              alt="ResuAve TextEditor Logo"
               className="w-8 h-8 rounded"
             />
             <span className="font-bold text-lg text-gray-900 tracking-tight">
-              Resuave Editor
+              ResuAve TextEditor
             </span>
           </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
@@ -64,7 +64,9 @@ export default function LandingPage() {
               GitHub <ExternalLink size={14} />
             </a>
             <a
-              href="#"
+              href="https://www.npmjs.com/package/@resuave/texteditor"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-black transition-colors"
             >
               NPM <ExternalLink size={14} />

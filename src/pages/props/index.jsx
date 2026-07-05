@@ -44,7 +44,7 @@ export default function PropsPage() {
               Props
             </h1>
             <p className="text-lg text-gray-600">
-              Learn the available props for Resuave Editor.
+              Learn the available props for ResuAve TextEditor.
             </p>
           </div>
         </div>
@@ -159,7 +159,7 @@ export default function PropsPage() {
 import { ResuAveTextEditor } from '@resuave/texteditor'
 
 export default function App() {
-  const [ value, setValue ] = useState('<p>Hello, Resuave!</p>')
+  const [ value, setValue ] = useState('<p>This is your first content.</p>')
 
   return (
     <ResuAveTextEditor value={value} onChange={setValue} />
