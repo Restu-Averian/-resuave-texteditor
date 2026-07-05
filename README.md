@@ -1,6 +1,11 @@
 # ResuAve TextEditor
 
+[![NPM Version](https://img.shields.io/npm/v/@resuave/texteditor)](https://www.npmjs.com/package/@resuave/texteditor)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A reusable rich text editor component built with Tiptap for React applications.
+
+**[View Live Demo & Documentation](https://resuave-texteditor.pages.dev/)**
 
 ## Installation
 

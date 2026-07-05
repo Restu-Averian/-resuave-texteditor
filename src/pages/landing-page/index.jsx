@@ -26,9 +26,11 @@ export default function LandingPage() {
             to="/"
             className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           >
-            <div className="w-8 h-8 bg-[#111111] text-white rounded flex items-center justify-center font-bold text-lg">
-              R
-            </div>
+            <img
+              src="/icon.webp"
+              alt="Resuave Editor Logo"
+              className="w-8 h-8 rounded"
+            />
             <span className="font-bold text-lg text-gray-900 tracking-tight">
               Resuave Editor
             </span>
