@@ -33,7 +33,7 @@ const SEARCH_DATA = [
       {
         id: "overview",
         title: "Overview",
-        description: "Introduction to Resuave Editor and key highlights",
+        description: "Introduction to ResuAve TextEditor and key highlights",
         icon: Home,
         type: "page",
         url: "/",
@@ -41,7 +41,7 @@ const SEARCH_DATA = [
       {
         id: "installation",
         title: "Installation",
-        description: "Install Resuave Editor in your React app",
+        description: "Install ResuAve TextEditor in your React app",
         icon: Download,
         type: "page",
         url: "/installation",
@@ -49,7 +49,7 @@ const SEARCH_DATA = [
       {
         id: "props",
         title: "Props",
-        description: "Learn the available props for Resuave Editor",
+        description: "Learn the available props for ResuAve TextEditor",
         icon: List,
         type: "page",
         url: "/props",

@@ -14,7 +14,7 @@ export default function Hero() {
           Build rich text editing faster.
         </h1>
         <p className="text-lg text-gray-500 leading-relaxed max-w-[480px]">
-          Resuave Editor is a reusable Tiptap editor component for React
+          ResuAve TextEditor is a reusable Tiptap editor component for React
           applications. Lightweight, feature-rich, and easy to integrate.
         </p>
         <div className="flex items-center gap-4 mt-4">
@@ -29,7 +29,7 @@ export default function Hero() {
       <div className="flex-1 w-full bg-white border border-gray-200 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
         <div className="p-2">
           <Texteditor
-            value="<h2>Your content, beautifully crafted.</h2><p>Resuave Editor gives you the tools to create, format, and organize content effortlessly.</p><ul><li>Lightweight and fast</li><li>Modern and accessible</li><li>Built with developers in mind</li></ul>"
+            value="<h2>Your content, beautifully crafted.</h2><p>ResuAve TextEditor gives you the tools to create, format, and organize content effortlessly.</p><ul><li>Lightweight and fast</li><li>Modern and accessible</li><li>Built with developers in mind</li></ul>"
             onChange={() => {}}
           />
         </div>

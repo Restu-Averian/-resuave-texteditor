@@ -22,7 +22,7 @@ export default function InstallationPage() {
               Installation
             </h1>
             <p className="text-lg text-gray-600">
-              Install Resuave Editor in your React app.
+              Install ResuAve TextEditor in your React app.
             </p>
           </div>
         </div>
@@ -78,7 +78,7 @@ import '@resuave/texteditor/style.css'
 
 export default function App() {
   return (
-    <ResuAveTextEditor content="Hello, Resuave!" onChange={(c) => console.log(c)} />
+    <ResuAveTextEditor content="This is your first content." onChange={(c) => console.log(c)} />
   )
 }`}
             />
