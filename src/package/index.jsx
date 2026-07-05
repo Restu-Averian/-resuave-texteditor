@@ -1,2 +1,2 @@
 import "./style.css";
-export { default as ResuaveEditor } from "../Texteditor.jsx";
+export { default as ResuAveTextEditor } from "../Texteditor.jsx";

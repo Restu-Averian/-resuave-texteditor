@@ -33,14 +33,14 @@ export default function PreviewCode() {
         <div className="p-6 flex flex-col gap-6 flex-1 bg-[#1a1b20]">
           <TabsContent value="installation" className="mt-0 outline-none">
             <CodePreview
-              code="npm install @resuave/tiptap-editor"
+              code="npm install @resuave/texteditor"
               language="bash"
               theme="dark"
             />
           </TabsContent>
           <TabsContent value="quick-start" className="mt-0 outline-none">
             <CodePreview
-              code={`import { ResuaveEditor } from "@resuave/tiptap-editor";\nfunction App() {\n  return (\n    <ResuaveEditor\n      placeholder="Start writing..."\n      onChange={(html) => console.log(html)}\n    />\n  );\n}`}
+              code={`import { ResuAveTextEditor } from "@resuave/texteditor";\nfunction App() {\n  return (\n    <ResuAveTextEditor\n      placeholder="Start writing..."\n      onChange={(html) => console.log(html)}\n    />\n  );\n}`}
               language="jsx"
               theme="dark"
             />

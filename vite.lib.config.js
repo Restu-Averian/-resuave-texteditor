@@ -18,7 +18,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/package/index.jsx"),
-      name: "ResuaveTextEditor",
+      name: "ResuAveTextEditor",
       formats: ["es", "cjs"],
       fileName: (format) => {
         if (format === "es") return "index.js";
