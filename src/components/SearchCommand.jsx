@@ -1,9 +1,18 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
+  DrawerTitle as DrawerTitleUI,
+  DrawerDescription as DrawerDescUI,
+} from "@/components/ui/drawer";
 import { useNavigate } from "react-router-dom";
 import {
   Search,
@@ -100,11 +109,28 @@ const SEARCH_DATA = [
   },
 ];
 
+export function useMediaQuery(query) {
+  const [value, setValue] = useState(false);
+
+  useEffect(() => {
+    function onChange(event) {
+      setValue(event.matches);
+    }
+    const result = matchMedia(query);
+    result.addEventListener("change", onChange);
+    setValue(result.matches);
+    return () => result.removeEventListener("change", onChange);
+  }, [query]);
+
+  return value;
+}
+
 export default function SearchCommand() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isMac, setIsMac] = useState(true);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const navigate = useNavigate();
   const listRef = useRef(null);
@@ -145,7 +171,6 @@ export default function SearchCommand() {
     });
   }, [query, open]);
 
-  // Scroll into view logic
   useEffect(() => {
     if (open && listRef.current) {
       const selectedEl = listRef.current.querySelector(
@@ -187,41 +212,36 @@ export default function SearchCommand() {
     }
   };
 
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <div
-          className="relative flex items-center cursor-text group"
-          onClick={() => setOpen(true)}
-        >
-          <Search
-            size={14}
-            className="absolute left-3 text-gray-400 group-hover:text-gray-600 transition-colors"
-          />
-          <div className="pl-9 pr-12 py-1.5 bg-gray-100 border border-transparent rounded-md text-sm text-gray-400 w-64 flex items-center group-hover:bg-gray-200/80 transition-all">
-            Search
-          </div>
-          <div className="absolute right-2 border border-gray-200 rounded px-1.5 py-0.5 text-[10px] text-gray-400 font-mono bg-white">
-            {isMac ? "⌘K" : "Ctrl+K"}
-          </div>
-        </div>
-      </PopoverTrigger>
+  const trigger = (
+    <div
+      className="relative flex items-center cursor-text group"
+      onClick={() => setOpen(true)}
+    >
+      <Search
+        size={14}
+        className="absolute left-3 text-gray-400 group-hover:text-gray-600 transition-colors"
+      />
+      <div className="pl-9 pr-12 py-1.5 bg-gray-100 border border-transparent rounded-md text-sm text-gray-400 w-[160px] md:w-64 flex items-center group-hover:bg-gray-200/80 transition-all">
+        Search
+      </div>
+      <div className="absolute right-2 border border-gray-200 rounded px-1.5 py-0.5 text-[10px] text-gray-400 font-mono bg-white hidden sm:block">
+        {isMac ? "⌘K" : "Ctrl+K"}
+      </div>
+    </div>
+  );
 
-      <PopoverContent
-        align="end"
-        sideOffset={8}
-        onOpenAutoFocus={(e) => e.preventDefault()}
-        className="w-[640px] p-0 shadow-2xl rounded-xl border border-gray-200 flex flex-col bg-white overflow-hidden"
-      >
-        <div className="flex items-center px-4 py-3 border-b border-gray-100">
-          <Search size={16} className="text-gray-400 mr-3 shrink-0" />
+  const innerContent = (
+    <>
+      <div className="px-5 pb-5 pt-3 md:pt-5">
+        <div className="flex items-center px-4 py-3.5 border border-gray-200 rounded-2xl shadow-sm focus-within:ring-2 focus-within:ring-gray-200 transition-shadow">
+          <Search size={18} className="text-gray-400 mr-3 shrink-0" />
           <input
             className="flex-1 bg-transparent text-[15px] outline-none placeholder:text-gray-400 text-gray-900"
             placeholder="Search..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            autoFocus
+            autoFocus={isDesktop}
           />
           {query && (
             <button
@@ -231,110 +251,141 @@ export default function SearchCommand() {
               <X size={14} />
             </button>
           )}
-          <div className="text-[10px] border border-gray-200 rounded px-1.5 py-0.5 font-mono text-gray-400 bg-gray-50">
+          <div className="text-[10px] border border-gray-200 rounded-md px-2 py-0.5 font-mono text-gray-400 bg-white ml-2">
             esc
           </div>
         </div>
+      </div>
 
-        <div
-          ref={listRef}
-          className="max-h-[420px] overflow-y-auto p-2 scroll-smooth"
-        >
-          {SEARCH_DATA.map((group, gIdx) => {
-            const groupItems = query
-              ? group.items.filter((item) =>
-                  flatItems.some((f) => f.id === item.id),
-                )
-              : group.items;
+      <div
+        ref={listRef}
+        className="max-h-[50vh] sm:max-h-[420px] overflow-y-auto px-2 pb-2 scroll-smooth"
+      >
+        {SEARCH_DATA.map((group, gIdx) => {
+          const groupItems = query
+            ? group.items.filter((item) =>
+                flatItems.some((f) => f.id === item.id),
+              )
+            : group.items;
 
-            if (groupItems.length === 0) return null;
+          if (groupItems.length === 0) return null;
 
-            return (
-              <div key={gIdx} className="mb-4 last:mb-0">
-                <div className="px-3 py-2 text-[10px] font-bold tracking-wider text-gray-400 uppercase">
-                  {group.category}
-                </div>
-                {groupItems.map((item) => {
-                  const globalIndex = flatItems.findIndex(
-                    (i) => i.id === item.id,
-                  );
-                  const isSelected = selectedIndex === globalIndex;
-                  return (
-                    <div
-                      key={item.id}
-                      onClick={() => handleSelect(item)}
-                      onMouseEnter={() => setSelectedIndex(globalIndex)}
-                      data-selected={isSelected}
-                      className={`flex items-center justify-between px-3 py-2.5 rounded-lg cursor-pointer transition-colors ${
-                        isSelected ? "bg-gray-100" : "hover:bg-gray-50"
-                      }`}
-                    >
-                      <div className="flex items-center gap-3 overflow-hidden">
-                        <div className="w-5 h-5 shrink-0 flex items-center justify-center text-gray-500">
-                          {typeof item.icon === "string" ? (
-                            <span className="font-mono text-[10.5px] font-bold">
-                              {item.icon}
-                            </span>
-                          ) : (
-                            <item.icon size={15} />
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 truncate">
-                          <span className="text-[13px] font-medium text-gray-900 shrink-0">
-                            {item.title}
+          return (
+            <div key={gIdx} className="mb-4 last:mb-0">
+              <div className="px-4 py-2 text-[11px] font-bold tracking-[0.08em] text-slate-400 uppercase">
+                {group.category}
+              </div>
+              {groupItems.map((item) => {
+                const globalIndex = flatItems.findIndex(
+                  (i) => i.id === item.id,
+                );
+                const isSelected = selectedIndex === globalIndex;
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => handleSelect(item)}
+                    onMouseEnter={() => setSelectedIndex(globalIndex)}
+                    data-selected={isSelected}
+                    className={`flex items-center justify-between mx-2 px-4 py-3.5 rounded-xl cursor-pointer transition-colors ${
+                      isSelected ? "bg-gray-50/80" : "hover:bg-gray-50/50"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4 overflow-hidden">
+                      <div className="w-5 h-5 shrink-0 flex items-center justify-center text-gray-500">
+                        {typeof item.icon === "string" ? (
+                          <span className="font-mono text-[11px] font-bold tracking-tight">
+                            {item.icon}
                           </span>
-                          {item.description && (
-                            <span className="text-[12px] text-gray-400 truncate">
-                              {item.description}
-                            </span>
-                          )}
-                        </div>
+                        ) : (
+                          <item.icon size={18} strokeWidth={1.5} />
+                        )}
                       </div>
-                      <div className="flex items-center gap-2 shrink-0 ml-4">
-                        {item.type === "link" ? (
-                          <ArrowUpRight size={14} className="text-gray-400" />
-                        ) : null}
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 truncate">
+                        <span className="text-[14px] font-medium text-gray-900 shrink-0">
+                          {item.title}
+                        </span>
+                        {item.description && (
+                          <span className="text-[13px] text-gray-400 truncate">
+                            {item.description}
+                          </span>
+                        )}
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-
-          {flatItems.length === 0 && (
-            <div className="py-12 text-center text-sm text-gray-500">
-              No results found for "{query}".
+                    <div className="flex items-center gap-2 shrink-0 ml-4">
+                      {item.type === "link" ? (
+                        <ArrowUpRight size={14} className="text-gray-400" />
+                      ) : null}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          )}
-        </div>
+          );
+        })}
 
-        <div className="px-4 py-2.5 border-t border-gray-100 bg-gray-50/80 flex items-center justify-between text-[11px] text-gray-500">
-          <div className="flex items-center gap-4 ml-auto">
-            <span className="flex items-center gap-1.5">
-              <span className="font-mono text-[10px] border border-gray-200 rounded px-1 bg-white">
-                ↑
-              </span>
-              <span className="font-mono text-[10px] border border-gray-200 rounded px-1 bg-white">
-                ↓
-              </span>
-              to navigate
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="font-mono text-[10px] border border-gray-200 rounded px-1 bg-white">
-                ↵
-              </span>
-              to select
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="font-mono text-[10px] border border-gray-200 rounded px-1 bg-white">
-                esc
-              </span>
-              to close
-            </span>
+        {flatItems.length === 0 && (
+          <div className="py-12 text-center text-sm text-gray-500">
+            No results found for "{query}".
           </div>
+        )}
+      </div>
+
+      <div className="px-6 py-4 border-t border-gray-100 bg-white flex items-center justify-center sm:justify-between text-[11px] text-gray-500 md:rounded-b-3xl">
+        <div className="flex items-center gap-6 mx-auto sm:mx-0">
+          <span className="flex items-center gap-2">
+            <span className="font-mono text-[10px] border border-gray-200 rounded-md px-1.5 py-0.5 bg-white">
+              ↑
+            </span>
+            <span className="font-mono text-[10px] border border-gray-200 rounded-md px-1.5 py-0.5 bg-white">
+              ↓
+            </span>
+            <span className="hidden sm:inline">to navigate</span>
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="font-mono text-[10px] border border-gray-200 rounded-md px-1.5 py-0.5 bg-white">
+              ↵
+            </span>
+            <span className="hidden sm:inline">to select</span>
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="font-mono text-[10px] border border-gray-200 rounded-md px-1.5 py-0.5 bg-white">
+              esc
+            </span>
+            <span className="hidden sm:inline">to close</span>
+          </span>
         </div>
-      </PopoverContent>
-    </Popover>
+      </div>
+    </>
+  );
+
+  if (isDesktop) {
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>{trigger}</DialogTrigger>
+        <DialogContent
+          showCloseButton={false}
+          className="w-full max-w-[640px] p-0 gap-0 rounded-3xl overflow-hidden shadow-2xl bg-white border-none outline-none data-open:zoom-in-95 data-closed:zoom-out-95"
+        >
+          <div className="sr-only">
+            <DialogTitle>Search Command</DialogTitle>
+            <DialogDescription>Search pages, props, and links</DialogDescription>
+          </div>
+          {innerContent}
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
+  return (
+    <Drawer open={open} onOpenChange={setOpen} direction="bottom">
+      <DrawerTrigger asChild>{trigger}</DrawerTrigger>
+      <DrawerContent className="p-0 bg-white border-none">
+        <div className="sr-only">
+          <DrawerTitleUI>Search Command</DrawerTitleUI>
+          <DrawerDescUI>Search pages, props, and links</DrawerDescUI>
+        </div>
+        {innerContent}
+      </DrawerContent>
+    </Drawer>
   );
 }

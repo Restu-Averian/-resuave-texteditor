@@ -6,8 +6,8 @@ export default function InstallationPage() {
   const [pkgManager, setPkgManager] = useState("npm");
 
   return (
-    <div className="flex-1 overflow-y-auto p-12">
-      <div className="max-w-4xl mx-auto flex flex-col gap-10">
+    <div className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12">
+      <div className="max-w-4xl mx-auto flex flex-col gap-8 md:gap-10">
         {/* Header Area */}
         <div className="flex flex-col gap-4">
           {/* Breadcrumb */}
@@ -28,14 +28,14 @@ export default function InstallationPage() {
         </div>
 
         {/* Package Manager Toggle */}
-        <div className="inline-flex p-1 bg-white border border-gray-200 rounded-lg w-fit">
+        <div className="inline-flex p-1 bg-white border border-gray-200 rounded-lg w-fit overflow-x-auto max-w-full">
           {["npm", "pnpm", "yarn", "bun"].map((pm) => (
             <button
               key={pm}
               onClick={() => setPkgManager(pm)}
-              className={`cursor-pointer px-10 py-2.5 text-sm font-medium rounded-md transition-colors ${
+              className={`cursor-pointer px-6 sm:px-10 py-2.5 text-sm font-medium rounded-md transition-colors whitespace-nowrap ${
                 pkgManager === pm
-                  ? "bg-[#111111] text-white"
+                  ? "bg-[#111111] text-white shadow-sm"
                   : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
               }`}
             >

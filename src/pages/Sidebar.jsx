@@ -18,25 +18,30 @@ function SidebarItem({ icon: Icon, label, to, active }) {
   );
 }
 
-export default function Sidebar() {
+export default function Sidebar({ className = "", isMobile = false }) {
   const location = useLocation();
   const path = location.pathname;
 
   return (
-    <aside className="w-64 border-r border-gray-200 bg-white flex flex-col h-screen sticky top-0">
-      <Link
-        to="/"
-        className="p-6 flex items-center gap-2 hover:opacity-80 transition-opacity"
-      >
-        <div className="w-8 h-8 bg-[#111111] text-white rounded flex items-center justify-center font-bold text-lg">
-          R
+    <aside
+      className={`w-64 border-r border-gray-200 bg-white flex flex-col h-[calc(100vh-4rem)] sticky top-16 shrink-0 ${className}`}
+    >
+      {isMobile && (
+        <div className="p-4 border-b border-gray-200">
+          <Link
+            to="/"
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          >
+            <div className="w-8 h-8 bg-[#111111] text-white rounded flex items-center justify-center font-bold text-lg leading-none">
+              R
+            </div>
+            <span className="font-semibold text-[17px] text-gray-900 tracking-tight">
+              Resuave Editor
+            </span>
+          </Link>
         </div>
-        <span className="font-semibold text-lg text-gray-900">
-          Resuave Editor
-        </span>
-      </Link>
-
-      <nav className="flex-1 px-4 flex flex-col gap-1">
+      )}
+      <nav className="flex-1 px-4 py-6 flex flex-col gap-1">
         <SidebarItem
           icon={Download}
           label="Installation"
