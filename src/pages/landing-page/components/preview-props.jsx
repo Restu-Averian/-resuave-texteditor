@@ -37,7 +37,7 @@ export default function PreviewProps() {
               <TableHead className="px-6 py-3 font-semibold text-gray-900 text-xs">
                 Default
               </TableHead>
-              <TableHead className="px-6 py-3 font-semibold text-gray-900 text-xs">
+              <TableHead className="hidden sm:table-cell px-6 py-3 font-semibold text-gray-900 text-xs">
                 Description
               </TableHead>
             </TableRow>
@@ -57,7 +57,7 @@ export default function PreviewProps() {
                 <TableCell className="px-6 py-3.5 text-gray-400 font-mono text-xs">
                   {prop.default}
                 </TableCell>
-                <TableCell className="px-6 py-3.5 text-gray-500 text-xs">
+                <TableCell className="hidden sm:table-cell px-6 py-3.5 text-gray-500 text-xs">
                   {prop.description}
                 </TableCell>
               </TableRow>

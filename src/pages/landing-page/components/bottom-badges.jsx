@@ -3,7 +3,7 @@ import { Zap, Puzzle, Accessibility, Shield } from "lucide-react";
 
 export default function BottomBadges() {
   return (
-    <section className="flex flex-wrap items-center justify-between lg:justify-center gap-12 lg:gap-24 pt-8 pb-16 border-t border-gray-200/60 mt-4">
+    <section className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center gap-y-10 gap-x-4 lg:gap-24 pt-8 pb-16 border-t border-gray-200/60 mt-4">
       <div className="flex items-center gap-4">
         <Zap size={24} strokeWidth={1.5} className="text-gray-800" />
         <div className="flex flex-col">

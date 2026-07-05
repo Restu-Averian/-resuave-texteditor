@@ -23,7 +23,7 @@ export default function CodePreview({
   );
 
   const btnClass = cn(
-    "cursor-pointer text-gray-400 transition-colors z-10 p-1 rounded absolute top-4 right-4 opacity-0 group-hover:opacity-100",
+    "cursor-pointer text-gray-400 transition-colors z-10 p-1 rounded absolute top-4 right-4 opacity-100 md:opacity-0 md:group-hover:opacity-100",
     isDark
       ? "hover:text-white bg-[#111111]"
       : "hover:text-gray-700 bg-[#fafafa]",
