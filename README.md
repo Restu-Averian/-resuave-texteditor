@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://resuave-texteditor.pages.dev/icon.webp" alt="ResuAve TextEditor" width="120" />
+  <img src="public/icon.webp" alt="ResuAve TextEditor" width="120" />
   <h1>ResuAve TextEditor</h1>
   <p><em>A reusable, modern rich text editor component built with Tiptap for React applications.</em></p>
 
