@@ -1,6 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
+import {
+  ExternalLink,
+  Menu,
+  FileText,
+  GitBranch as Github,
+  Package,
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "../../components/ui/dropdown-menu";
 import Hero from "./components/hero";
 import HighlightFeatures from "./components/highlight-features";
 import PreviewCode from "./components/preview-code";
@@ -35,7 +48,7 @@ export default function LandingPage() {
               Resuave Editor
             </span>
           </Link>
-          <div className="flex items-center gap-8 text-sm font-medium text-gray-700">
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
             <Link
               to="/installation"
               className="hover:text-black transition-colors"
@@ -56,6 +69,77 @@ export default function LandingPage() {
             >
               NPM <ExternalLink size={14} />
             </a>
+          </div>
+          <div className="md:hidden flex items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 outline-none flex items-center justify-center">
+                <Menu size={20} className="text-gray-900" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="end"
+                className="w-56 p-2 rounded-xl mt-2 shadow-[0_8px_30px_rgb(0,0,0,0.08)] bg-white border border-gray-100"
+              >
+                <DropdownMenuItem className="p-0 cursor-pointer rounded-lg hover:bg-gray-50 focus:bg-gray-50 outline-none">
+                  <Link
+                    to="/installation"
+                    className="flex items-center gap-3 w-full px-3 py-2.5"
+                  >
+                    <FileText
+                      size={16}
+                      strokeWidth={2}
+                      className="text-gray-700"
+                    />
+                    <span className="font-medium text-gray-900 text-[15px]">
+                      Docs
+                    </span>
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator className="my-1 bg-gray-100" />
+
+                <DropdownMenuItem className="p-0 cursor-pointer rounded-lg hover:bg-gray-50 focus:bg-gray-50 outline-none">
+                  <a
+                    href="https://github.com/Restu-Averian/-resuave-texteditor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between w-full px-3 py-2.5"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Github
+                        size={16}
+                        strokeWidth={2}
+                        className="text-gray-700"
+                      />
+                      <span className="font-medium text-gray-900 text-[15px]">
+                        GitHub
+                      </span>
+                    </div>
+                    <ExternalLink size={14} className="text-gray-400" />
+                  </a>
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator className="my-1 bg-gray-100" />
+
+                <DropdownMenuItem className="p-0 cursor-pointer rounded-lg hover:bg-gray-50 focus:bg-gray-50 outline-none">
+                  <a
+                    href="#"
+                    className="flex items-center justify-between w-full px-3 py-2.5"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Package
+                        size={16}
+                        strokeWidth={2}
+                        className="text-gray-700"
+                      />
+                      <span className="font-medium text-gray-900 text-[15px]">
+                        NPM
+                      </span>
+                    </div>
+                    <ExternalLink size={14} className="text-gray-400" />
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </header>
 
