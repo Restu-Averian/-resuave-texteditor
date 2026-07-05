@@ -97,7 +97,7 @@ const SEARCH_DATA = [
         description: "View on npmjs.com",
         icon: Package,
         type: "link",
-        url: "https://www.npmjs.com",
+        url: "https://www.npmjs.com/package/@resuave/texteditor",
       },
     ],
   },

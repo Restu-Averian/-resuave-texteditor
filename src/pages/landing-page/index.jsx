@@ -64,7 +64,9 @@ export default function LandingPage() {
               GitHub <ExternalLink size={14} />
             </a>
             <a
-              href="#"
+              href="https://www.npmjs.com/package/@resuave/texteditor"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-black transition-colors"
             >
               NPM <ExternalLink size={14} />
