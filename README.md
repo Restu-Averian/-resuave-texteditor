@@ -1,4 +1,4 @@
-# Resuave TextEditor
+# ResuAve TextEditor
 
 A reusable rich text editor component built with Tiptap for React applications.
 

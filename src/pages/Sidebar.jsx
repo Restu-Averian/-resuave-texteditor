@@ -1,4 +1,5 @@
 import React from "react";
+import { version as versionPackage } from "../../package.json";
 import { Link, useLocation } from "react-router-dom";
 import { Download, List as ListIcon } from "lucide-react";
 
@@ -57,7 +58,9 @@ export default function Sidebar({ className = "", isMobile = false }) {
       </nav>
 
       <div className="p-4 border-t border-gray-100 flex flex-col gap-3 text-sm text-gray-600">
-        <div className="text-gray-400 mt-2">Resuave Editor v0.1.0</div>
+        <div className="text-gray-400 mt-2">
+          ResuAve TextEditor v{versionPackage}
+        </div>
       </div>
     </aside>
   );
