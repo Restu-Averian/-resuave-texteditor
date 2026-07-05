@@ -62,7 +62,7 @@ export default function InstallationPage() {
               2. Install peer dependencies
             </h3>
             <CodePreview
-              code={`${pkgManager} ${pkgManager === "yarn" ? "add" : "install"} react react-dom @tiptap/react @tiptap/pm @tiptap/starter-kit`}
+              code={`${pkgManager} ${pkgManager === "yarn" ? "add" : "install"} react react-dom`}
             />
           </div>
 
